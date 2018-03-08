@@ -20,7 +20,7 @@ export class Melody extends Component {
   handleSubmit = (evt) => {
     evt.preventDefault();
     const { name, email, tonality } = this.state;
-    alert('submitted')
+    alert('submitted');
 
     // this.setState({ submittedName: name, submittedEmail: email });
   }
