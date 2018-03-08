@@ -3,27 +3,27 @@ var getRandomMelody = require('./getRandomMelody');
 
 // Needs polished. Temp implementation will add flat notes
 function numToNote(num) {
-  let tableNotes = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];
-  return tableNotes[Math.floor(num%12)] + (Math.floor(num/12) - 1);
+  let tableNotes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+  return tableNotes[Math.floor(num % 12)] + (Math.floor(num / 12) - 1);
 }
 
-let tonalityOptions = document.getElementById("tonalityOptions");
-let midiRange = document.getElementById("midiRange");
-let midiLength = document.getElementById("midiLength");
-let midiJump = document.getElementById("midiJump");
-let lengthValues = document.getElementById("lengthValues");
-let midiQTY = document.getElementById("midiQTY");
-let generate = document.getElementById("generate");
-let results = document.getElementById("results");
+let tonalityOptions = document.getElementById('tonalityOptions');
+let midiRange = document.getElementById('midiRange');
+let midiLength = document.getElementById('midiLength');
+let midiJump = document.getElementById('midiJump');
+let lengthValues = document.getElementById('lengthValues');
+let midiQTY = document.getElementById('midiQTY');
+let generate = document.getElementById('generate');
+let results = document.getElementById('results');
 
-generate.addEventListener("click", function() {
-  let result = "";
+generate.addEventListener('click', function() {
+  let result = '';
 
   let melodies = midiQTY.value || 1;
   for (let i = 0; i < melodies; i++) {
 
     let type = tonalityOptions.options[tonalityOptions.selectedIndex].value;
-    let range = midiRange.value || "";
+    let range = midiRange.value || '';
     let length = midiLength.value || 10;
     let jump = midiJump.value || 12;
     let randomNotes = getRandomMelody({type, range, length, jump});
@@ -32,7 +32,7 @@ generate.addEventListener("click", function() {
 
     let noteArray = [];
 
-    for (let i = 0; i<randomNotes.length; i++) {
+    for (let i = 0; i < randomNotes.length; i++) {
       let pitch = [randomNotes[i]];
       let duration = lengthValues.value || 2;
       let note = new MidiWriter.NoteEvent({pitch, duration});
@@ -45,19 +45,19 @@ generate.addEventListener("click", function() {
     let file = write.dataUri();
 
     result += `<div style="position: relative" class="resultRow">`;
-    result += `${randomNotes.map(m=>`<span>${m}</span>`).join(" ")}`;
+    result += `${randomNotes.map(m => `<span>${m}</span>`).join(' ')}`;
     result += `<br>`;
-    result += `${randomNotes.map(m=>`<span>${numToNote(m)}</span>`).join(" ")}`;
+    result += `${randomNotes.map(m => `<span>${numToNote(m)}</span>`).join(' ')}`;
 
     result +=  `<a class="download" title="Download" href="${file}">
                   <i class="fa fa-music fa-lg" aria-hidden="true"></i>
-                </a>`
+                </a>`;
 
     result += `</div>`;
   }
 
   results.innerHTML = result;
-})
+});
 
 // For reference
 
@@ -98,9 +98,9 @@ generate.addEventListener("click", function() {
 // }
 
 // document.body.innerHTML += `<a href="${zeroTo127()}" download="0t127.midi">0 to 127</a><br>`;
-// document.body.innerHTML += `<a href="${zeroTo127("t20")}" download="0t127.midi">0 to 127 (Faster)</a><br><br>`;    
+// document.body.innerHTML += `<a href="${zeroTo127("t20")}" download="0t127.midi">0 to 127 (Faster)</a><br><br>`;
 // document.body.innerHTML += `<a href="${zeroTo127dia()}" download="0t127.midi">0 to 127 Diatomic</a><br>`;
-// document.body.innerHTML += `<a href="${zeroTo127dia("t20")}" download="0t127.midi">0 to 127 Diatomic(Faster)</a><br><br>`;    
+// document.body.innerHTML += `<a href="${zeroTo127dia("t20")}" download="0t127.midi">0 to 127 Diatomic(Faster)</a><br><br>`;
 
 // //This is so not pretty
 // let tableNotes = ["C","C#/Db","D","D#/Eb","E","F","F#/Gb","G","G#/Ab","A","A#/Bb","B"];
