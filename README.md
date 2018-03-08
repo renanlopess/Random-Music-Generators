@@ -27,3 +27,8 @@ Edit - I just did exactly that. Worked perfectly.
 `npm run dev` - starts auto updating server.
 
 Have also been playing around with 'now' (Would need to install seperately) For insta publishing node projects.
+
+## Changelog
+
+*Sept 2017*
+- Slight tweaks in index.html styles.
