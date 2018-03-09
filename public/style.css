@@ -20,6 +20,9 @@ form div {
   display: inline-block;
 }
 
+.ui.table {
+  width: auto;
+}
 /* .ui.dropdown .menu {
     max-height: ?;
 */
