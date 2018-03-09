@@ -1,5 +1,5 @@
 const MidiWriter = require('midi-writer-js');
-const getRandomMelody = require('./getRandomMelody');
+const createRandomMelody = require('./createRandomMelody');
 
 /*eslint-disable complexity*/
 // called when 'generate' is clicked
@@ -19,7 +19,7 @@ function createMidi({
     let range = midiRange || '';
     let length = midiLength || 10;
     let jump = midiJump || 12;
-    let randomNotes = getRandomMelody({ type, range, length, jump });
+    let randomNotes = createRandomMelody({ type, range, length, jump });
 
     let track = new MidiWriter.Track();
 
