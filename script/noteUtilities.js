@@ -36,7 +36,6 @@ function numToNote(midiNum) {
   return pitchArray[Math.floor(midiNum % 12)] + (Math.floor(midiNum / 12) - 1);
 }
 
-
 module.exports = {
   getRandomIntInclusive,
   numToNote,
