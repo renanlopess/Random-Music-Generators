@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Form, Select, Button } from 'semantic-ui-react';
+import {MelodyResult} from './index';
 
 /**
  * COMPONENT
@@ -54,22 +55,22 @@ export class Melody extends Component {
         <div>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group>
-          <Form.Field control={Select} label="Tonality Options" options={tonalityOptions} defaultValue="diatonic" name="tonality" value={tonality} onChange={this.handleChange} />          
+          <Form.Field control={Select} label="Tonality Options" options={tonalityOptions} defaultValue="diatonic" name="tonality" value={tonality} onChange={this.handleChange} />
           <Form.Field size="tiny" control={Select} label="Note Durations" options={lengthValueOptions} defaultValue="Quarter Note (1 beat)" name="lengthValues" value={lengthValues} onChange={this.handleChange} />
           </Form.Group>
 
           <Form.Group>
-          <Form.Input label="Note Range" name="midiRange" placeholder="G3 G5" value={midiRange} onChange={this.handleChange}/>
-          <Form.Input label="Max Jump" name="midiJump" value={midiJump} placeholder="Min: 0, Max: 127" onChange={this.handleChange}/>
-          <Form.Input type="number" label="No of Notes" name="midiLength" value={midiLength} placeholder="Min: 1, Max: 50" min={1} max= {50} onChange={this.handleChange}/>
-          <Form.Input type="number" label="No of Melodies" name="midiQTY" value={midiQTY} placeholder="Min: 1, Max: 20" min={1} max= {20} onChange={this.handleChange}/>
+          <Form.Input label="Note Range" name="midiRange" placeholder="G3 G5" value={midiRange} onChange={this.handleChange} />
+          <Form.Input label="Max Jump" name="midiJump" value={midiJump} placeholder="Min: 0, Max: 127" onChange={this.handleChange} />
+          <Form.Input type="number" label="No of Notes" name="midiLength" value={midiLength} placeholder="Min: 1, Max: 50" min={1} max= {50} onChange={this.handleChange} />
+          <Form.Input type="number" label="No of Melodies" name="midiQTY" value={midiQTY} placeholder="Min: 1, Max: 20" min={1} max= {20} onChange={this.handleChange} />
           </Form.Group>
           <Form.Button content="Submit" />
         </Form>
         <strong>state:</strong>
         <pre>{JSON.stringify(this.state, null, 2)}</pre>
       </div>
-
+      <MelodyResult />
       </div>
     );
   }
