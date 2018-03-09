@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Melody} from './Melody';
+import Melody from './Melody';
 
 /**
  * COMPONENT
  */
 export const Home = (props) => {
+  // console.log('home props',props)
   return (
     <Melody />
   );

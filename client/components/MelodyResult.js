@@ -10,7 +10,7 @@ import { Table } from 'semantic-ui-react';
 export const MelodyResult = (props) => {
   const noteNumbers = [23, 24, 25];
   const pitches = ['C', 'C#', 'D'];
-  console.log('MELODIES:', props.melodies);
+  console.log('PROPS in melodyResult:', props);
 
   return (
     <Table definition>

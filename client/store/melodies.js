@@ -1,16 +1,15 @@
 // import axios from 'axios';
 // import history from '../history';
-import getRandomMelody from '../../script/getRandomMelody';
 
 /**
  * ACTION TYPES
  */
-const GENERATE_MELODIES = 'GENERATE_MELODIES';
+const GET_MELODIES = 'GET_MELODIES';
 
 /**
  * ACTION CREATORS
  */
-export const generateMelodies = config => ({type: GENERATE_MELODIES, melodies: getRandomMelody(config)});
+export const getMelodies = melodies => ({type: GET_MELODIES, melodies});
 
 /**
  * THUNK CREATORS
@@ -27,7 +26,7 @@ export const generateMelodies = config => ({type: GENERATE_MELODIES, melodies: g
  */
 export default function (state = [], action) {
   switch (action.type) {
-    case GENERATE_MELODIES:
+    case GET_MELODIES:
       return action.melodies;
     default:
       return state;
