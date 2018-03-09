@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Form, Select, Button } from 'semantic-ui-react';
 import {MelodyResult} from './index';
+import {generateMelodies} from '../store/melodies';
 
 /**
  * COMPONENT
@@ -24,8 +25,9 @@ export class Melody extends Component {
 
   handleSubmit = (evt) => {
     evt.preventDefault();
-    const { tonality, midiRange, midiJump, lengthValues, midiLength, midiQTY } = this.state.formValues;
-    alert('submitted');
+    // const { tonality, midiRange, midiJump, lengthValues, midiLength, midiQTY } = this.state.formValues;
+    // this.props.generateMelodies(this.state.formValues);
+    console.table(this.props)
 
     // this.setState({ submittedName: name, submittedEmail: email });
   }
@@ -85,4 +87,12 @@ const mapState = state => {
   };
 };
 
-export default connect(mapState)(Melody);
+const mapDispatch = dispatch => {
+  return {
+    generateMelodies(config) {
+      return dispatch(generateMelodies(config));
+    }
+  };
+};
+
+export default connect(mapState, mapDispatch)(Melody);

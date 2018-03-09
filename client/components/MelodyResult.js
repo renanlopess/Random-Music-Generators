@@ -7,9 +7,10 @@ import { Table } from 'semantic-ui-react';
  * COMPONENT
  */
 
-export const MelodyResult = () => {
+export const MelodyResult = (props) => {
   const noteNumbers = [23, 24, 25];
   const pitches = ['C', 'C#', 'D'];
+  console.log('MELODIES:', props.melodies);
 
   return (
     <Table definition>
@@ -39,7 +40,7 @@ export const MelodyResult = () => {
  */
 const mapState = state => {
   return {
-    email: state.user.email
+    melodies: state.melodies
   };
 };
 
