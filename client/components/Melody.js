@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Form, Select, Button } from 'semantic-ui-react';
 import MelodyResult from './MelodyResult';
 import {getMelodies} from '../store/melodies';
+import { generateMidiArray } from '../../script/generateMidiArray';
 
 /**
  * COMPONENT
@@ -13,7 +14,7 @@ export class Melody extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formValues: { tonality: 'diatonic', pitchRange: 'G3 G5', intervalJump: 7, rhythmValues: 4, midiLength: 10, midiQuantity: 10 }
+      formValues: { tonality: 'diatonic', pitchRange: 'G3 G5', intervalJump: 7, rhythmValues: 4, midiLength: 10, midiQuantity: 2 }
     };
   }
 
@@ -25,8 +26,8 @@ export class Melody extends Component {
 
   handleSubmit = (evt) => {
     evt.preventDefault();
-    // do more stuff
-    this.props.getMelodies(this.state.formValues);
+    const midiArray = generateMidiArray(this.state.formValues);
+    this.props.getMelodies(midiArray);
   }
 
   render() {
@@ -51,7 +52,7 @@ export class Melody extends Component {
     ];
     return (
       <div>
-      <h1>Random Melody Generator</h1>
+      <h3>Random Melody Generator</h3>
       <div>
       <Form onSubmit={this.handleSubmit}>
         <Form.Group>
@@ -67,9 +68,6 @@ export class Melody extends Component {
         </Form.Group>
         <Form.Button content="Submit" />
       </Form>
-      <strong>state:</strong>
-      <pre>{JSON.stringify(this.state, null, 2)}</pre>
-      <pre>{JSON.stringify(this.props, null, 2)}</pre>
     </div>
     <MelodyResult />
       </div>
@@ -98,5 +96,8 @@ const mapDispatch = dispatch => {
 export default connect(mapState, mapDispatch)(Melody);
 
 /*
+      <strong>state:</strong>
+      <pre>{JSON.stringify(this.state, null, 2)}</pre>
+      <pre>{JSON.stringify(this.props, null, 2)}</pre>
 
 */
