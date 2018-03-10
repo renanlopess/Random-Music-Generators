@@ -1,4 +1,4 @@
-const { generateMidiArray, getDownloadLink } = require('../script/generateMidiArray');
+const { generateMidiArray } = require('../script/generateMidiArray');
 const {numToNote} = require('../script/noteUtilities');
 
 // const  = main;
@@ -50,8 +50,8 @@ function testCreateMidi3() {
 }
 
 function testDownload() {
-  console.log('this should be a link');
-  console.log(getDownloadLink(generateMidiArray('chromatic', '', '10', '7', '4', '10')));
+  console.log('this was a link');
+  console.log(generateMidiArray('chromatic', '', '10', '7', '4', '10'));
 }
 
 function runTests() {
