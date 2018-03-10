@@ -39,12 +39,6 @@ function createMidiFile(midiCodeArray, rhythmValues) {
   return file;
 }
 
-function getDownloadLink(url) {
-  return `<a class="download" title="Download" href="${url}">
-          <i class="fa fa-music fa-lg" aria-hidden="true"></i>
-          </a>`;
-}
-
 // let tonalityOptions = document.getElementById('tonalityOptions');
 // let midiRange = document.getElementById('midiRange');
 // let midiLength = document.getElementById('midiLength');
@@ -57,7 +51,6 @@ function getDownloadLink(url) {
 // generate.addEventListener('click', () => createMidi());
 
 module.exports = {
-  generateMidiArray,
-  getDownloadLink
+  generateMidiArray
 };
 
