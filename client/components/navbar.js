@@ -7,7 +7,7 @@ import { logout } from '../store';
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
     <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-      <span style={{ marginTop: 10, fontSize: '1.5em' }}>Random Music Generators</span>
+      <span style={{ marginTop: 15, fontSize: '1.5em', fontWeight: 'bold' }}>Random Music Generators</span>
       <nav>
         {isLoggedIn ? (
           <div>
