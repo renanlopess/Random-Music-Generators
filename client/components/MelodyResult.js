@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Table, Button, Icon, Modal } from 'semantic-ui-react';
 import Tone from 'Tone';
-import previewMelody from './PreviewMelody';
 import NoteGrid from './NoteGrid';
+import { selectMelody, removeMelody } from '../store/melody';
 
 // import testMusical from '../../script/testMusical';
 /**
@@ -15,18 +15,20 @@ export class MelodyResult extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalOpen: false
+      modalOpen: false,
+      modalId: null
     };
   }
-  handleOpen = (midiDataObject) => {
-    this.setState({ modalOpen: true }, () => {
-      previewMelody(true, midiDataObject);
+  handleOpen = (midiDataObject, modalId) => {
+    this.setState({ modalOpen: true, modalId }, () => {
+      this.props.selectMelody(midiDataObject);
     });
   };
 
   handleClose = () => {
-    previewMelody(false);
-    this.setState({ modalOpen: false });
+    this.setState({ modalOpen: false, modalId: null }, () => {
+      this.props.removeMelody();
+    });
   }
 
   createTableCells(arr) {
@@ -43,7 +45,7 @@ export class MelodyResult extends Component {
   render() {
     const noteNumbers = [23, 24, 25];
     const pitches = ['C', 'C#', 'D'];
-    console.log('PROPS/State in melodyResult:', this.props, this.state);
+    // console.log('PROPS/State in melodyResult:', this.props, this.state);
 
     if (!this.props.melodies.length) {
       return (
@@ -58,7 +60,7 @@ export class MelodyResult extends Component {
         {this.props.melodies.map((midiDataObject, i) => {
           return (
             <div key={i}>
-              <Table definition key={i}>
+              <Table definition>
                 <Table.Body>
                   <Table.Row>
                     <Table.Cell>Pitch</Table.Cell>
@@ -78,7 +80,7 @@ export class MelodyResult extends Component {
                     icon
                     labelPosition="left"
                     color="blue"
-                    onClick={() => this.handleOpen(midiDataObject)}
+                    onClick={() => this.handleOpen(midiDataObject, i)}
                   >
                     <Icon name="play" />
                     PREVIEW
@@ -86,10 +88,13 @@ export class MelodyResult extends Component {
                 }
                 closeIcon
               >
+              {
+                this.state.modalId === i &&
                 <Modal.Content>
-                  <NoteGrid melody={midiDataObject} />
+                <NoteGrid />
                 </Modal.Content>
-              </Modal>
+              }
+                </Modal>
 
               <a
                 className="download"
@@ -118,7 +123,18 @@ const mapState = state => {
   };
 };
 
-export default connect(mapState)(MelodyResult);
+const mapDispatch = dispatch => {
+  return {
+    selectMelody(melody) {
+      return dispatch(selectMelody(melody));
+    },
+    removeMelody() {
+      return dispatch(removeMelody());
+    }
+  };
+};
+
+export default connect(mapState, mapDispatch)(MelodyResult);
 
 /*
 {createNoteNumbers(midiDataObject)}
