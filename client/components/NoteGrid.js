@@ -9,16 +9,17 @@ import { Table } from 'semantic-ui-react';
  * COMPONENT
  */
 export const NoteGrid = props => {
-  const midiData = props.melody;
-  const rows = 2;
+  const midiData = props.melody.midiCodeArray;
+  const melody = props.melody.pitchNamesWithOctave;
+  const len = melody.length;
+  const active = (props.progress * len) + '-0';
+  const rows = 1;
   // const cols = 3;
-  const active = '2-0';
   // const map = { 0: 2, 1: 1, 2: 0 };
-  const melody = midiData.pitchNamesWithOctave;
 
   const buildTable = (rows, arr) => {
     const cells = [];
-    for (let i = 0; i < rows; i++) {
+    for (let i = rows - 1; i >= 0; i--) {
       cells.push(
         <Table.Row key={i}>
           {arr.map((item, j) => {
@@ -28,7 +29,7 @@ export const NoteGrid = props => {
             }
             return (
               <Table.Cell key={`${j}-${i}`} className={cls}>
-                {j}-{i}
+                Note: {j + 1} Row: {i + 1}
               </Table.Cell>
             );
           })}
@@ -43,7 +44,6 @@ export const NoteGrid = props => {
     <Table celled>
       <Table.Body>{buildTable(rows, melody)}</Table.Body>
     </Table>
-    <PreviewMelody />
     </div>
   );
 };

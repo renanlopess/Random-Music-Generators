@@ -20,6 +20,10 @@ form div {
   display: inline-block;
 }
 
+.ui.table td.active, .ui.table tr.active {
+  background: #fa26d9!important;
+}
+
 .ui.table {
   /* width: auto; */
 }

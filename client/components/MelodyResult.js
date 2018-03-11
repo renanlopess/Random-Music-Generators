@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Table, Button, Icon, Modal } from 'semantic-ui-react';
 import Tone from 'Tone';
 import NoteGrid from './NoteGrid';
+import PreviewMelody from './PreviewMelody';
 import { selectMelody, removeMelody } from '../store/melody';
 
 // import testMusical from '../../script/testMusical';
@@ -20,8 +21,9 @@ export class MelodyResult extends Component {
     };
   }
   handleOpen = (midiDataObject, modalId) => {
-    this.setState({ modalOpen: true, modalId }, () => {
-      this.props.selectMelody(midiDataObject);
+    Promise.resolve(this.props.selectMelody(midiDataObject))
+    .then(() => {
+      this.setState({ modalOpen: true, modalId });
     });
   };
 
@@ -43,8 +45,6 @@ export class MelodyResult extends Component {
   };
 
   render() {
-    const noteNumbers = [23, 24, 25];
-    const pitches = ['C', 'C#', 'D'];
     // console.log('PROPS/State in melodyResult:', this.props, this.state);
 
     if (!this.props.melodies.length) {
@@ -91,7 +91,7 @@ export class MelodyResult extends Component {
               {
                 this.state.modalId === i &&
                 <Modal.Content>
-                <NoteGrid />
+                <PreviewMelody />
                 </Modal.Content>
               }
                 </Modal>

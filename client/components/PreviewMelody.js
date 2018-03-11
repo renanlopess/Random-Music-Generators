@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Table, Button, Icon, Modal } from 'semantic-ui-react';
 import Tone from 'Tone';
+import NoteGrid from './NoteGrid';
 
 /**
  * COMPONENT
@@ -16,20 +17,25 @@ export class PreviewMelody extends Component {
       tempo: 80,
       synth: new Tone.Synth().toMaster(),
       sequence: null,
-      playing: false
+      playing: false,
+      progress: -1
     };
   }
 
   componentDidMount() {
     // console.log('cdm')
-    this.togglePlay(this.props.melody);
+    var synth = this.state.synth;
+    synth.volume.value = -6;
+    this.setState({synth}, () => {
+      this.togglePlay(this.props.melody);
+    })
   }
   componentWillUnmount() {
     // console.log('c will unmount')
     this.togglePlay();
   }
 
-  togglePlay(midiData) {
+  togglePlay = (midiData) => {
     // console.log('toggleplay params: midiData', midiData);
     const melodyArray = midiData ? midiData.pitchNamesWithOctave : [];
     if (!melodyArray.length) {
@@ -41,7 +47,8 @@ export class PreviewMelody extends Component {
       this.setState(
         {
           sequence: null,
-          playing: false
+          playing: false,
+          progress: -1
         },
         () => {
           console.log('modal closed, state:', this.state);
@@ -51,29 +58,45 @@ export class PreviewMelody extends Component {
       return;
     }
     // SEQUENCE - have to trigger release on modal close or stop
-    var synth = this.state.synth;
-    synth.volume.value = -6;
 
     //pass in an array of events
-    let seq = new Tone.Sequence(
-      function(time, event) {
+    this.setState({sequence: new Tone.Sequence(
+      (time, event) => {
         //the events will be given to the callback with the time they occur
-        synth.triggerAttackRelease(event, this.state.rhythm);
+        this.state.synth.triggerAttackRelease(event, this.state.rhythm);
+        if (this.state.sequence) {
+          this.setState({progress: this.state.sequence.progress});
+        }
       },
       melodyArray,
       this.state.rhythm
-    );
-    //start the seq at the beginning of the Transport's timeline
-    seq.start(0);
-
-    //loop the seq 3 times (true for infinite)
-    seq.loop = 2;
-    this.setState({ sequence: seq, playing: true, synth }, () => {
+    )
+  });
+    this.setState((prevState, props) => {
+      let sequence = prevState.sequence;
+      sequence.loop = 2;
+      return {sequence, playing: true};
+    }, () => {
       // seq.loopEnd = '1m';//leave this off
+      this.state.sequence.start(0);
       Tone.Transport.bpm.value = this.state.tempo;
       Tone.Transport.start('+0.1');
       console.log('modal open, state:', this.state);
-    });
+    }
+  );
+    //start the seq at the beginning of the Transport's timeline
+    // seq.start(0);
+
+    //loop the seq 3 times (true for infinite)
+    // seq.loop = 2;
+
+    // this.setState({ playing: true, synth }, () => {
+    //   // seq.loopEnd = '1m';//leave this off
+    //   Tone.Transport.bpm.value = this.state.tempo;
+    //   Tone.Transport.start('+0.1');
+    //   console.log('modal open, state:', this.state);
+    // });
+
     // var seq = new Tone.Sequence(
     //   function(time, event) {
     //     //the events will be given to the callback with the time they occur
@@ -87,7 +110,18 @@ export class PreviewMelody extends Component {
   render() {
     const { rhythm, tempo, synth, sequence, transport, playing } = this.state;
     // console.log('preview state/props:', this.state, this.props);
-    return <div />;
+    return (
+      <div>
+      {
+        this.state.sequence &&
+        <p>Progress:
+        {this.state.progress}
+        </p>
+      }
+
+        <NoteGrid progress={this.state.progress} />
+      </div>
+    );
   }
 }
 
