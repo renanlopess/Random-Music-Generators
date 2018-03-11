@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Melody from './Melody';
+// import Melody from './Melody';
+import PreviewMelody from './PreviewMelody';
 import { Table } from 'semantic-ui-react';
 
 /**
@@ -38,9 +39,12 @@ export const NoteGrid = props => {
   };
 
   return (
+    <div>
     <Table celled>
       <Table.Body>{buildTable(rows, melody)}</Table.Body>
     </Table>
+    <PreviewMelody />
+    </div>
   );
 };
 
@@ -50,6 +54,7 @@ export const NoteGrid = props => {
 const mapState = state => {
   return {
     // email: state.user.email
+    melody: state.melody
   };
 };
 
