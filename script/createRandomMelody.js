@@ -80,7 +80,7 @@ function getMidiRange(pitchRange = '') {
         return Number(input);
       } else {
         // Note String
-        let note = input.match(/(?:(?!\d|-).)*/g)[0]; // Grab Note part. Thank you https://regex101.com
+        let note = input.match(/(?:(?!\d|-).)*/gi)[0].toUpperCase(); // Grab Note part. Thank you https://regex101.com
         let octave = Number(input.match(/[-]*\d/g)); // Grab number from string. Potentially negative
         if (pitchMap[note]) {
           // Passed in note exists
