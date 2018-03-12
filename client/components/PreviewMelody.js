@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Table, Button, Icon, Modal } from 'semantic-ui-react';
 import Tone from 'Tone';
 import NoteGrid from './NoteGrid';
+import TempoSlider from './TempoSlider';
 
 /**
  * COMPONENT
@@ -14,7 +15,6 @@ export class PreviewMelody extends Component {
     super(props);
     this.state = {
       rhythm: '8n',
-      tempo: 80,
       synth: new Tone.Synth().toMaster(),
       sequence: null,
       playing: false,
@@ -57,8 +57,6 @@ export class PreviewMelody extends Component {
       // synth.volume.value = -80;
       return;
     }
-    // SEQUENCE - have to trigger release on modal close or stop
-
     //pass in an array of events
     this.setState({sequence: new Tone.Sequence(
       (time, event) => {
@@ -66,6 +64,7 @@ export class PreviewMelody extends Component {
         this.state.synth.triggerAttackRelease(event, this.state.rhythm);
         if (this.state.sequence) {
           this.setState({progress: this.state.sequence.progress});
+          Tone.Transport.bpm.value = this.props.melody.tempo;
         }
       },
       melodyArray,
@@ -74,12 +73,11 @@ export class PreviewMelody extends Component {
   });
     this.setState((prevState, props) => {
       let sequence = prevState.sequence;
-      sequence.loop = 2;
+      // sequence.loop = 2;
       return {sequence, playing: true};
     }, () => {
       // seq.loopEnd = '1m';//leave this off
       this.state.sequence.start(0);
-      Tone.Transport.bpm.value = this.state.tempo;
       Tone.Transport.start('+0.1');
       console.log('modal open, state:', this.state);
     }
@@ -108,7 +106,7 @@ export class PreviewMelody extends Component {
   }
 
   render() {
-    const { rhythm, tempo, synth, sequence, transport, playing } = this.state;
+    // const { rhythm, synth, sequence, transport, playing } = this.state;
     // console.log('preview state/props:', this.state, this.props);
     return (
       <div>
@@ -120,6 +118,7 @@ export class PreviewMelody extends Component {
       }
 
         <NoteGrid progress={this.state.progress} />
+        <TempoSlider />
       </div>
     );
   }
