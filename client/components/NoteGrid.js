@@ -4,22 +4,26 @@ import { connect } from 'react-redux';
 // import Melody from './Melody';
 import PreviewMelody from './PreviewMelody';
 import { Table } from 'semantic-ui-react';
+import getRowMap from '../../script/getRowMap';
 
 /**
  * COMPONENT
  */
 export const NoteGrid = props => {
   const midiData = props.melody.midiCodeArray;
+  const rowMap = getRowMap(midiData);
   const melody = props.melody.pitchNamesWithOctave;
   const len = melody.length;
-  const active = (props.progress * len) + '-0';
-  const rows = 1;
-  // const cols = 3;
-  // const map = { 0: 2, 1: 1, 2: 0 };
+  const activeIndex = props.progress * len;
+  const activeRow = rowMap[midiData[activeIndex]];
+  const active = activeIndex + '-' + activeRow;
+  // console.log('active stuff:', activeIndex, activeRow, active)
+  // console.log('midiData / rowMap:', midiData, rowMap)
+  const rows = rowMap.rows;
 
-  const buildTable = (rows, arr) => {
+  const buildTable = (_rows, arr) => {
     const cells = [];
-    for (let i = rows - 1; i >= 0; i--) {
+    for (let i = _rows - 1; i >= 0; i--) {
       cells.push(
         <Table.Row key={i}>
           {arr.map((item, j) => {
@@ -29,7 +33,7 @@ export const NoteGrid = props => {
             }
             return (
               <Table.Cell key={`${j}-${i}`} className={cls}>
-                Note: {j + 1} Row: {i + 1}
+                { }
               </Table.Cell>
             );
           })}
@@ -41,9 +45,20 @@ export const NoteGrid = props => {
 
   return (
     <div>
-    <Table celled>
-      <Table.Body>{buildTable(rows, melody)}</Table.Body>
-    </Table>
+      <Table celled>
+        <Table.Header>
+          <Table.Row>
+            {melody.map((note, i) => {
+              return (
+                <Table.HeaderCell key={i}>
+                  {note} ({midiData[i]})
+                </Table.HeaderCell>
+              );
+            })}
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>{buildTable(rows, melody)}</Table.Body>
+      </Table>
     </div>
   );
 };
@@ -59,3 +74,9 @@ const mapState = state => {
 };
 
 export default connect(mapState)(NoteGrid);
+
+/*
+this was in a cell:
+
+Note: {j + 1} Row: {i + 1}
+*/
