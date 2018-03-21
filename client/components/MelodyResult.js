@@ -7,7 +7,6 @@ import NoteGrid from './NoteGrid';
 import PreviewMelody from './PreviewMelody';
 import { selectMelody, removeMelody } from '../store/melody';
 
-// import testMusical from '../../script/testMusical';
 /**
  * COMPONENT
  */
@@ -45,18 +44,17 @@ export class MelodyResult extends Component {
   };
 
   render() {
-    // console.log('PROPS/State in melodyResult:', this.props, this.state);
 
     if (!this.props.melodies.length) {
       return (
         <div>
-          <h3>No results to display.</h3>
+          <h6 style={{margin: '25px'}}>Results will display here.</h6>
         </div>
       );
     }
 
     return (
-      <div style={{ width: '900px', overflowX: 'scroll' }}>
+      <div id="result-wrapper">
         {this.props.melodies.map((midiDataObject, i) => {
           return (
             <div key={i}>
@@ -135,8 +133,3 @@ const mapDispatch = dispatch => {
 };
 
 export default connect(mapState, mapDispatch)(MelodyResult);
-
-/*
-{createNoteNumbers(midiDataObject)}
-{createPitchNames(midiDataObject)}
-*/

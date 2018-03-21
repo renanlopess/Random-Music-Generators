@@ -1,5 +1,3 @@
-// import axios from 'axios';
-// import history from '../history';
 
 /**
  * ACTION TYPES
@@ -14,16 +12,6 @@ const REMOVE_MELODY = 'REMOVE_MELODY';
 export const selectMelody = melody => ({ type: SELECT_MELODY, melody });
 export const removeMelody = () => ({ type: REMOVE_MELODY });
 export const changeTempo = tempo => ({ type: CHANGE_TEMPO, tempo });
-
-/**
- * THUNK CREATORS
- */
-// export const me = () =>
-//   dispatch =>
-//     axios.get('/auth/me')
-//       .then(res =>
-//         dispatch(getUser(res.data || defaultUser)))
-//       .catch(err => console.log(err));
 
 /**
  * REDUCER

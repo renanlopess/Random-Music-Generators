@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import Melody from './Melody';
 import PreviewMelody from './PreviewMelody';
 import { Table } from 'semantic-ui-react';
 import getRowMap from '../../script/getRowMap';
@@ -68,7 +67,6 @@ export const NoteGrid = props => {
  */
 const mapState = state => {
   return {
-    // email: state.user.email
     melody: state.melody
   };
 };

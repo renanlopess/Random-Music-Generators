@@ -23,7 +23,6 @@ export class PreviewMelody extends Component {
   }
 
   componentDidMount() {
-    // console.log('cdm')
     var synth = this.state.synth;
     synth.volume.value = -6;
     this.setState({synth}, () => {
@@ -31,12 +30,10 @@ export class PreviewMelody extends Component {
     })
   }
   componentWillUnmount() {
-    // console.log('c will unmount')
     this.togglePlay();
   }
 
   togglePlay = (midiData) => {
-    // console.log('toggleplay params: midiData', midiData);
     const melodyArray = midiData ? midiData.pitchNamesWithOctave : [];
     if (!melodyArray.length) {
       this.state.synth.triggerRelease();
@@ -82,32 +79,10 @@ export class PreviewMelody extends Component {
       console.log('modal open, state:', this.state);
     }
   );
-    //start the seq at the beginning of the Transport's timeline
-    // seq.start(0);
 
-    //loop the seq 3 times (true for infinite)
-    // seq.loop = 2;
-
-    // this.setState({ playing: true, synth }, () => {
-    //   // seq.loopEnd = '1m';//leave this off
-    //   Tone.Transport.bpm.value = this.state.tempo;
-    //   Tone.Transport.start('+0.1');
-    //   console.log('modal open, state:', this.state);
-    // });
-
-    // var seq = new Tone.Sequence(
-    //   function(time, event) {
-    //     //the events will be given to the callback with the time they occur
-    //     synth.triggerAttackRelease(event, this.state.rhythm);
-    //   },
-    //   melodyArray,
-    //   this.state.rhythm
-    // );
   }
 
   render() {
-    // const { rhythm, synth, sequence, transport, playing } = this.state;
-    // console.log('preview state/props:', this.state, this.props);
     return (
       <div>
       {
@@ -134,8 +109,3 @@ const mapState = state => {
 };
 
 export default connect(mapState)(PreviewMelody);
-
-/*
-{createNoteNumbers(midiDataObject)}
-{createPitchNames(midiDataObject)}
-*/
