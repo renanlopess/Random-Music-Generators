@@ -1,0 +1,52 @@
+body {
+  font-family: sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+label {
+  display: block;
+}
+
+nav a {
+  display: inline-block;
+  margin: 1em;
+}
+
+form div {
+  margin: 1em;
+  display: inline-block;
+}
+
+#result-wrapper {
+  width: 1200px;
+  overflow-x: scroll;
+  /* margin: auto; */
+}
+
+.ui.table td.active,
+.ui.table tr.active {
+  background: #fa26d9 !important;
+}
+
+.ui.form .field > label {
+  padding-left: 18px;
+}
+
+#main-submit {
+  text-align: center;
+  width: 100%;
+}
+
+.ui.table {
+  /* width: auto; */
+}
+/* .ui.dropdown .menu {
+    max-height: ?;
+*/
+/* You might also want to add `!important` to automatically override all media-queries. */
+/*
+} 
+*/
