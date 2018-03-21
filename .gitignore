@@ -29,9 +29,12 @@ Temporary Items
 .apdisk
 
 # DEC
-notes
+-notes
 tests
 node_modules
+secrets.js
+.vscode
+/public
 
 
 
