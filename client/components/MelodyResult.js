@@ -18,7 +18,8 @@ export class MelodyResult extends Component {
   //   };
   // }
 
-  static createTableCells(arr) {
+  /*eslint-disable class-methods-use-this*/
+  createTableCells(arr) {
     return arr.map((num, i) => {
       return <Table.Cell key={i} className="table-cell">{num}</Table.Cell>;
     });
