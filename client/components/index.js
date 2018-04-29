@@ -9,3 +9,4 @@ export {Login, Signup} from './auth-form';
 export {default as Home} from './Home';
 export {default as Melody} from './Melody';
 export {default as MelodyResult} from './MelodyResult';
+export {default as MelodyModal} from './MelodyModal';
