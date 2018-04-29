@@ -1,50 +1,36 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Table, Button, Icon, Modal } from 'semantic-ui-react';
-import Tone from 'Tone';
-import NoteGrid from './NoteGrid';
-import PreviewMelody from './PreviewMelody';
+import { Table, Button, Icon } from 'semantic-ui-react';
 import { selectMelody, removeMelody } from '../store/melody';
+import { MelodyModal } from './';
 
 /**
  * COMPONENT
  */
 
 export class MelodyResult extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modalOpen: false,
-      modalId: null
-    };
-  }
-  handleOpen = (midiDataObject, modalId) => {
-    Promise.resolve(this.props.selectMelody(midiDataObject))
-    .then(() => {
-      this.setState({ modalOpen: true, modalId });
-    });
-  };
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     // modalOpen: false,
+  //     // modalId: null
+  //   };
+  // }
 
-  handleClose = () => {
-    this.setState({ modalOpen: false, modalId: null }, () => {
-      this.props.removeMelody();
-    });
-  }
-
-  createTableCells(arr) {
+  static createTableCells(arr) {
     return arr.map((num, i) => {
-      return <Table.Cell key={i}>{num}</Table.Cell>;
+      return <Table.Cell key={i} className="table-cell">{num}</Table.Cell>;
     });
   }
-
-  playExampleTone = () => {
-    console.log('clicked');
-    // playTone();
-  };
 
   render() {
-
+    // console.log('melody result props', this.props)
+    if (!this.props.melodies) {
+      return (
+        <div>Getting melodies...</div>
+      )
+    }
     if (!this.props.melodies.length) {
       return (
         <div>
@@ -57,42 +43,20 @@ export class MelodyResult extends Component {
       <div id="result-wrapper">
         {this.props.melodies.map((midiDataObject, i) => {
           return (
-            <div key={i}>
+            <div key={i} style={{width: '100%'}}>
               <Table definition>
                 <Table.Body>
                   <Table.Row>
-                    <Table.Cell>Pitch</Table.Cell>
+                    <Table.Cell className="table-title">Pitch</Table.Cell>
                     {this.createTableCells(midiDataObject.pitchNamesWithOctave)}
                   </Table.Row>
                   <Table.Row>
-                    <Table.Cell>MIDI Code</Table.Cell>
+                    <Table.Cell className="table-title">MIDI Code</Table.Cell>
                     {this.createTableCells(midiDataObject.midiCodeArray)}
                   </Table.Row>
                 </Table.Body>
               </Table>
-              <Modal
-                open={this.state.modalOpen}
-                onClose={this.handleClose}
-                trigger={
-                  <Button
-                    icon
-                    labelPosition="left"
-                    color="blue"
-                    onClick={() => this.handleOpen(midiDataObject, i)}
-                  >
-                    <Icon name="play" />
-                    PREVIEW
-                  </Button>
-                }
-                closeIcon
-              >
-              {
-                this.state.modalId === i &&
-                <Modal.Content>
-                <PreviewMelody />
-                </Modal.Content>
-              }
-                </Modal>
+              <MelodyModal midiDataObject={midiDataObject} />
 
               <a
                 className="download"
