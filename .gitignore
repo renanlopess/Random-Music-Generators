@@ -1,7 +1,21 @@
+# Boilermaker
+
+node_modules
+public/bundle.js
+public/bundle.js.map
+secrets.js
+npm-debug.log
+yarn-error.log
+
+# DEC
+-notes
+# tests
+.vscode
 
 # Created by https://www.gitignore.io/api/osx
 
 ### OSX ###
+.DS_Store
 *.DS_Store
 .AppleDouble
 .LSOverride
@@ -27,15 +41,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-
-# DEC
--notes
-tests
-node_modules
-secrets.js
-.vscode
-/public
-
 
 
 # End of https://www.gitignore.io/api/osx
