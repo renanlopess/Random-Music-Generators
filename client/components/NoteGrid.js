@@ -44,7 +44,7 @@ export const NoteGrid = props => {
 
   return (
     <div>
-      <Table celled>
+      <Table celled unstackable>
         <Table.Header>
           <Table.Row>
             {melody.map((note, i) => {

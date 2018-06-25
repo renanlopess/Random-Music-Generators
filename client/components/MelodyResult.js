@@ -44,8 +44,8 @@ export class MelodyResult extends Component {
       <div id="result-wrapper">
         {this.props.melodies.map((midiDataObject, i) => {
           return (
-            <div key={i} style={{width: '100%'}}>
-              <Table definition>
+            <div key={i} className="result-single">
+              <Table definition unstackable>
                 <Table.Body>
                   <Table.Row>
                     <Table.Cell className="table-title">Pitch</Table.Cell>

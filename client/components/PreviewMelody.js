@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Table, Button, Icon, Modal } from 'semantic-ui-react';
+// import { Table, Button, Icon, Modal } from 'semantic-ui-react';
 import Tone from 'Tone';
 import NoteGrid from './NoteGrid';
 import TempoSlider from './TempoSlider';

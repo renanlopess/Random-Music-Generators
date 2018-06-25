@@ -30,15 +30,13 @@ nav a {
 
 /* MAIN CONTENT */
 
-form div {
-  margin: 1em;
-  display: inline-block;
-}
 
 #result-wrapper {
-  width: 1200px;
-  overflow-x: scroll;
-  /* margin: auto; */
+  width: 100%;
+}
+
+.result-single {
+  margin-bottom: 16px;
 }
 
 .ui.table td.active,
@@ -46,17 +44,27 @@ form div {
   background: #fa26d9 !important;
 }
 
-.ui.form .field > label {
-  padding-left: 18px;
+/* .melody-main-form */
+.melody-main-form .field > label {
+  padding-left: 0;
+}
+
+/* Melody Submit Button */
+.melody-main-form > .field:last-child {
+  text-align: center;
 }
 
 #main-submit {
-  text-align: center;
-  width: 100%;
+  margin-bottom: 1em;
+  display: inline-block;
+  width: 100px;
 }
 
+
+
 .ui.table {
-  width: auto;
+  width: 100%;
+  margin-bottom: 4px;
 }
 /* .ui.dropdown .menu {
     max-height: ?;
