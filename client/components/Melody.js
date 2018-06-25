@@ -51,7 +51,7 @@ export class Melody extends Component {
       { key: 64, text: 'Sixty-fourth Note (1/16 beat)', value: 64 }
     ];
     return (
-      <div style={{margin: 25}}>
+      <div className="melody-main-wrapper">
       <h3 style={{display: 'none'}}>Random Melody Generator</h3>
       <div>
         <Form onSubmit={this.handleSubmit} className="melody-main-form">

@@ -21,7 +21,7 @@ export class MelodyResult extends Component {
   /*eslint-disable class-methods-use-this*/
   createTableCells(arr) {
     return arr.map((num, i) => {
-      return <Table.Cell key={i} className="table-cell">{num}</Table.Cell>;
+      return <Table.Cell key={i} className="result-table-cell">{num}</Table.Cell>;
     });
   }
 
@@ -48,11 +48,11 @@ export class MelodyResult extends Component {
               <Table definition unstackable>
                 <Table.Body>
                   <Table.Row>
-                    <Table.Cell className="table-title">Pitch</Table.Cell>
+                    <Table.Cell style={{width: '92px'}} className="result-table-title">Pitch</Table.Cell>
                     {this.createTableCells(midiDataObject.pitchNamesWithOctave)}
                   </Table.Row>
                   <Table.Row>
-                    <Table.Cell className="table-title">MIDI Code</Table.Cell>
+                    <Table.Cell className="result-table-title">MIDI Code</Table.Cell>
                     {this.createTableCells(midiDataObject.midiCodeArray)}
                   </Table.Row>
                 </Table.Body>

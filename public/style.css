@@ -44,6 +44,12 @@ nav a {
   background: #fa26d9 !important;
 }
 
+
+/* .melody-main-wrapper */
+.melody-main-wrapper {
+  margin: 25px 15px;
+}
+
 /* .melody-main-form */
 .melody-main-form .field > label {
   padding-left: 0;
@@ -61,11 +67,16 @@ nav a {
 }
 
 
-
 .ui.table {
   width: 100%;
   margin-bottom: 4px;
 }
+
+/* .ui.definition.table tobody tr > td.result-table-title {
+  width: 92px;
+  max-width: 92px!important;
+} */
+
 /* .ui.dropdown .menu {
     max-height: ?;
 */
@@ -74,10 +85,6 @@ nav a {
 } 
 */
 
-.table-title {
-  max-width: 110px;
-}
-
-.table-cell {
+.result.table-cell {
   max-width: 30px;
 }
