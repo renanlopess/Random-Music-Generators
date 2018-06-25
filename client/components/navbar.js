@@ -21,7 +21,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
             </a>
           </div>
         ) : (
-          <div>
+          <div style={{display: 'none'}}>
             {/* The navbar will show these links before you log in */}
             <Link to="">Login</Link>
             <Link to="">Sign Up</Link>
