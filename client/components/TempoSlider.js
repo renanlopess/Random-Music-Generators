@@ -30,6 +30,7 @@ export class TempoSlider extends Component {
 
     return (
       <div>
+        <span className="tempo-label">Tempo:</span>
         <Slider
           color="purple"
           inverted={true}

@@ -81,9 +81,18 @@ nav a {
 }
 
 
-.ui.table {
+.result-single > .ui.table {
   width: 100%;
   margin-bottom: 4px;
+}
+
+.result.table-cell {
+  max-width: 30px;
+}
+
+.tempo-label {
+  display: block;
+  margin-top: 6px;
 }
 
 /* .ui.definition.table tobody tr > td.result-table-title {
@@ -98,11 +107,6 @@ nav a {
 /*
 } 
 */
-
-.result.table-cell {
-  max-width: 30px;
-}
-
 
 
 
