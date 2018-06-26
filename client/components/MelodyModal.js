@@ -13,12 +13,14 @@ export class MelodyModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalOpen: false
+      modalOpen: false,
+      fullscreen: false,
     };
   }
   handleOpen = midiDataObject => {
     Promise.resolve(this.props.selectMelody(midiDataObject)).then(() => {
-      this.setState({ modalOpen: true });
+      const len = midiDataObject.midiCodeArray.length;
+      this.setState({ modalOpen: true, fullscreen: len > 14 });
     });
   };
 
@@ -31,6 +33,7 @@ export class MelodyModal extends Component {
   render() {
     return (
       <Modal
+        size={this.state.fullscreen ? 'fullscreen' : ''}
         open={this.state.modalOpen}
         onClose={this.handleClose}
         trigger={
