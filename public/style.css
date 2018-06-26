@@ -18,14 +18,21 @@ nav a {
 }
 
 .navbar-flex {
-  display: flex; justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
+
 .img-logo {
-  float: left; width: 40px; margin: 6px 10px 0px 0px;
+  float: left;
+  width: 40px;
+  margin: 6px 10px 0px 8px;
 }
 
 .txt-logo {
-  float: right; margin-top: 18px; font-size: 1.5em; font-weight: bold;
+  float: left;
+  margin: 18px 0 0 0;
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
 /* MAIN CONTENT */
@@ -55,15 +62,22 @@ nav a {
   padding-left: 0;
 }
 
-/* Melody Submit Button */
-.melody-main-form > .field:last-child {
-  text-align: center;
+.ui.form .fields {
+  margin-bottom: 4px;
 }
 
+/* Melody Submit Button */
+/*
+.melody-main-form > .field:last-child {
+    text-align: center;
+}
+*/
+
+
 #main-submit {
-  margin-bottom: 1em;
+  margin: 8px 0 1em 25%;
   display: inline-block;
-  width: 100px;
+  width: 150px;
 }
 
 
@@ -88,3 +102,23 @@ nav a {
 .result.table-cell {
   max-width: 30px;
 }
+
+
+
+
+
+@media screen and (max-width: 420px) {
+  .img-logo {
+    float: left;
+    width: 20px;
+    margin: 12px 10px 0px 8px;
+  }
+  
+  .txt-logo {
+    float: left;
+    margin: 11px 0 0 0;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+}
+  

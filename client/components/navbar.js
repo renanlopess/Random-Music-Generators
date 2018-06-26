@@ -9,7 +9,8 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
     <div className="navbar-flex">
       <div>
           <img src="/img/random-music-logo.png" alt="random music logo" className="img-logo" />
-        <span className="txt-logo">Random Music Generators</span>
+          <span className="txt-logo">Random Music Generators</span>
+          <img src="/img/random-music-logo.png" alt="random music logo" className="img-logo" />
       </div>
       <nav>
         {isLoggedIn ? (
