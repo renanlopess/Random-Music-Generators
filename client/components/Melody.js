@@ -13,6 +13,9 @@ import { generateMidiArray } from '../../script/generateMidiArray';
 export class Melody extends Component {
   constructor(props) {
     super(props);
+    /** What about having the formValues at the state?
+     * this.state = {tonality: 'diatonic', ...}
+     */
     this.state = {
       formValues: { tonality: 'diatonic', pitchRange: 'G3 G5', intervalJump: 7, rhythmValues: 4, midiLength: 10, midiQuantity: 2 }
     };
@@ -21,6 +24,9 @@ export class Melody extends Component {
   handleChange = (evt, { name, value }) => {
     const {formValues} = this.state;
     formValues[name] = value;
+    /** if tonality, pitchRange were in the state you could just
+     * this.setState({[name]: value})
+     */
     this.setState({formValues});
   }
 
@@ -34,6 +40,11 @@ export class Melody extends Component {
     // const { email } = this.props;
     // console.log('melody props',this.props)
     const { tonality, pitchRange, intervalJump, rhythmValues, midiLength, midiQuantity } = this.state.formValues;
+    /**
+     * PN: what about putting tonalityOptions and lengthValueOptions
+     * outside of the class? these value will get reinstantiated every time
+     * this component rerenders
+     */
     const tonalityOptions = [
       { key: 'diatonic', text: 'Diatonic', value: 'diatonic' },
       { key: 'chromatic', text: 'Chromatic', value: 'chromatic' },
@@ -55,6 +66,7 @@ export class Melody extends Component {
       <h3 style={{display: 'none'}}>Random Melody Generator</h3>
       <div>
         <Form onSubmit={this.handleSubmit} className="melody-main-form">
+            {/* Can we just export Group/Field/Input/Button from the semantic-ui-react package? */}
           <Form.Group >
             <Form.Field control={Select} label="Tonality Options" options={tonalityOptions} name="tonality" value={tonality} onChange={this.handleChange} />
             <Form.Field control={Select} label="Note Durations" options={lengthValueOptions} name="rhythmValues" value={rhythmValues} onChange={this.handleChange} />
@@ -85,6 +97,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getMelodies(melodies) {
+      /** dispatch isn't defined */
       return dispatch(getMelodies(melodies));
     }
   };
