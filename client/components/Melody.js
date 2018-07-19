@@ -62,19 +62,18 @@ export class Melody extends Component {
     return (
       <div className="melody-main-wrapper">
       <h3 style={{display: 'none'}}>Random Melody Generator</h3>
-      <div>
-        <Form onSubmit={this.handleSubmit} className="melody-main-form">
-            {/* Can we just export Group/Field/Input/Button from the semantic-ui-react package? */}
-          <Form.Group >
-            <Form.Field control={Select} label="Tonality Options" options={tonalityOptions} name="tonality" value={tonality} onChange={this.handleChange} />
-            <Form.Field control={Select} label="Note Durations" options={lengthValueOptions} name="rhythmValues" value={rhythmValues} onChange={this.handleChange} />
-            <Form.Input label="Note Range" name="pitchRange" placeholder="G3 G5" value={pitchRange} onChange={this.handleChange} />
-            <Form.Input label="Max Jump" name="intervalJump" value={intervalJump} placeholder="Min: 0, Max: 127" onChange={this.handleChange} />
-            <Form.Input type="number" label="No of Notes" name="midiLength" value={midiLength} placeholder="Min: 1, Max: 50" min={1} max= {50} onChange={this.handleChange} />
-            <Form.Input type="number" label="No of Melodies" name="midiQuantity" value={midiQuantity} placeholder="Min: 1, Max: 20" min={1} max= {20} onChange={this.handleChange} />
-          </Form.Group>
-          <Form.Button color="purple" content="Submit" id="main-submit" />
-        </Form>
+        <div>
+          <Form onSubmit={this.handleSubmit} className="melody-main-form">
+            <Form.Group >
+              <Form.Field control={Select} label="Tonality Options" options={tonalityOptions} name="tonality" value={tonality} onChange={this.handleChange} />
+              <Form.Field control={Select} label="Note Durations" options={lengthValueOptions} name="rhythmValues" value={rhythmValues} onChange={this.handleChange} />
+              <Form.Input label="Note Range" name="pitchRange" placeholder="G3 G5" value={pitchRange} onChange={this.handleChange} />
+              <Form.Input label="Max Jump" name="intervalJump" value={intervalJump} placeholder="Min: 0, Max: 127" onChange={this.handleChange} />
+              <Form.Input type="number" label="No of Notes" name="midiLength" value={midiLength} placeholder="Min: 1, Max: 50" min={1} max={50} onChange={this.handleChange} />
+              <Form.Input type="number" label="No of Melodies" name="midiQuantity" value={midiQuantity} placeholder="Min: 1, Max: 20" min={1} max={20} onChange={this.handleChange} />
+            </Form.Group>
+            <Form.Button color="purple" content="Submit" id="main-submit" />
+          </Form>
       </div>
       <MelodyResult />
       </div>
@@ -92,12 +91,8 @@ const mapState = state => {
   };
 };
 
-const mapDispatch = dispatch => {
-  return {
-    getMelodies(melodies) {
-      return dispatch(getMelodies(melodies));
-    }
-  };
+const mapDispatch = {
+  getMelodies
 };
 
 export default connect(mapState, mapDispatch)(Melody);
