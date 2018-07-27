@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Form, Select, Button } from 'semantic-ui-react';
 import MelodyResult from './MelodyResult';
-import {getMelodies} from '../store/melodies';
-import { generateMidiArray } from '../../script/generateMidiArray';
+import {getMelodies} from '../../store/melodies';
+import { generateMidiArray } from '../../../server/script/generateMidiArray';
 
 const INITIAL_FORM_VALUES = {
   tonality: 'diatonic',

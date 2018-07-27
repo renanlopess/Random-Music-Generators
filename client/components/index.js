@@ -3,10 +3,8 @@
  * This way, we can import all of our components from the same place, rather than
  * having to figure out which file they belong to!
  */
-export {default as Navbar} from './navbar';
-export {default as UserHome} from './user-home';
-export {Login, Signup} from './auth-form';
 export {default as Home} from './Home';
-export {default as Melody} from './Melody';
-export {default as MelodyResult} from './MelodyResult';
-export {default as MelodyModal} from './MelodyModal';
+export {default as Melody} from './MelodyScene';
+export {default as Navbar} from './navbar';
+export {default as UserHome} from './UserScene/user-home';
+export {Login, Signup} from './UserScene/auth-form';

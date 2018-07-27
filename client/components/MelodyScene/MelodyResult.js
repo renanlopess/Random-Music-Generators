@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Table, Button, Icon } from 'semantic-ui-react';
-import { selectMelody, removeMelody } from '../store/melody';
+import { selectMelody, removeMelody } from '../../store/melody';
 import { MelodyModal } from './';
 
 /**
