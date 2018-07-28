@@ -5,6 +5,6 @@
  */
 export {default as Home} from './Home';
 export {default as Melody} from './MelodyScene';
-export {default as Navbar} from './navbar';
-export {default as UserHome} from './UserScene/user-home';
-export {Login, Signup} from './UserScene/auth-form';
+export {default as Navbar} from './Navbar';
+export {default as UserHome} from './UserScenes/user-home';
+export {Login, Signup} from './UserScenes/auth-form';
