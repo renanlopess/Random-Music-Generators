@@ -19,20 +19,43 @@ nav a {
 
 .navbar-flex {
   display: flex;
-  justify-content: space-around;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: 0 42px;
+}
+
+.logo-container {
+  /* margin: 0 auto; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .img-logo {
-  float: left;
   width: 40px;
-  margin: 6px 10px 0px 8px;
 }
 
 .txt-logo {
-  float: left;
-  margin: 18px 0 0 0;
+  margin: 8px 6px 0 6px;
   font-size: 1.5em;
   font-weight: bold;
+}
+
+.nav-menu-main {
+  width: 58%;
+}
+
+.nav-menu-main .ui.secondary.menu .active.item {
+  background: transparent;
+  color: #a333c8;/*theme purple*/
+  border-radius: 6px;
+  border: 1px solid transparent;
+  border-bottom-color: #a333c8;
+}
+
+.ui.secondary.menu .dropdown.item:hover, .ui.secondary.menu .link.item:hover, .ui.secondary.menu a.item:hover {
+  background: transparent;
+  color: #a333c8;/*theme purple*/
 }
 
 /* MAIN CONTENT */
@@ -54,10 +77,19 @@ nav a {
 
 /* .melody-main-wrapper */
 .melody-main-wrapper {
-  margin: 25px 15px;
+  margin: 25px auto;
+  width: fit-content;
 }
 
 /* .melody-main-form */
+.melody-main-form {
+  padding: 0 16px 16px 16px;
+}
+
+.melody-main-form .fields {
+  flex-wrap: wrap;
+}
+
 .melody-main-form .field > label {
   padding-left: 0;
 }
@@ -67,15 +99,11 @@ nav a {
 }
 
 /* Melody Submit Button */
-/*
 .melody-main-form > .field:last-child {
     text-align: center;
 }
-*/
-
 
 #main-submit {
-  margin: 8px 0 1em 25%;
   display: inline-block;
   width: 150px;
 }
@@ -110,19 +138,30 @@ nav a {
 
 
 
+@media screen and (max-width: 950px) {
+  .nav-menu-main {
+    width: 100%;
+    margin: 0 auto;
+  }
 
-@media screen and (max-width: 420px) {
+  .logo-container {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 500px) {
   .img-logo {
-    float: left;
     width: 20px;
-    margin: 12px 10px 0px 8px;
   }
   
   .txt-logo {
-    float: left;
-    margin: 11px 0 0 0;
     font-size: 1.2em;
-    font-weight: bold;
+  }
+}
+  
+@media screen and (max-width: 350px) {
+  .txt-logo {
+    width: 56%;
   }
 }
   

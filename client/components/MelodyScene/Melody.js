@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Form, Select, Button } from 'semantic-ui-react';
+import { Form, Select } from 'semantic-ui-react';
 import MelodyResult from './MelodyResult';
 import {getMelodies} from '../../store/melodies';
 import { generateMidiArray } from '../../../server/script/generateMidiArray';
@@ -15,11 +15,6 @@ const INITIAL_FORM_VALUES = {
   midiQuantity: 2
 };
 
-/**
- * PN: what about putting tonalityOptions and lengthValueOptions
- * outside of the class? these values will get reinstantiated every time
- * this component rerenders
- */
 const tonalityOptions = [
   { key: 'diatonic', text: 'Diatonic', value: 'diatonic' },
   { key: 'chromatic', text: 'Chromatic', value: 'chromatic' },
@@ -61,8 +56,6 @@ export class Melody extends Component {
 
     return (
       <div className="melody-main-wrapper">
-      <h3 style={{display: 'none'}}>Random Melody Generator</h3>
-        <div>
           <Form onSubmit={this.handleSubmit} className="melody-main-form">
             <Form.Group >
               <Form.Field control={Select} label="Tonality Options" options={tonalityOptions} name="tonality" value={tonality} onChange={this.handleChange} />
@@ -74,7 +67,6 @@ export class Melody extends Component {
             </Form.Group>
             <Form.Button color="purple" content="Submit" id="main-submit" />
           </Form>
-      </div>
       <MelodyResult />
       </div>
     );
