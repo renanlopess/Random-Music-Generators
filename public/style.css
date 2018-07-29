@@ -22,6 +22,7 @@ nav a {
   flex-flow: row wrap;
   justify-content: space-between;
   padding: 0 42px;
+  padding-top: 8px;
 }
 
 .logo-container {
@@ -41,8 +42,14 @@ nav a {
   font-weight: bold;
 }
 
-.nav-menu-main {
+/* later - after login/logout available */
+/* .nav-menu-main {
   width: 58%;
+} */
+
+.nav-menu-main {
+  width: fit-content;
+  float: right;
 }
 
 .nav-menu-main .ui.secondary.menu .active.item {
@@ -137,8 +144,8 @@ nav a {
 */
 
 
-
-@media screen and (max-width: 950px) {
+/* change to 950 after adding more links */
+@media screen and (max-width: 767px) {
   .nav-menu-main {
     width: 100%;
     margin: 0 auto;
@@ -146,6 +153,12 @@ nav a {
 
   .logo-container {
     width: 100%;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .nav-menu-main .ui.stackable.menu .item {
+      width: auto !important;/* override semantic */
   }
 }
 
