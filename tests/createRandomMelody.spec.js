@@ -1,4 +1,4 @@
-const createRandomMelody = require('../script/createRandomMelody');
+const createRandomMelody = require('../server/script/createRandomMelody');
 
 function testName(name) {
   console.log('\n***', name, '***\n');

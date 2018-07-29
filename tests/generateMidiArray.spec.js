@@ -1,5 +1,5 @@
-const { generateMidiArray } = require('../script/generateMidiArray');
-const {numToNote} = require('../script/noteUtilities');
+const { generateMidiArray } = require('../server/script/generateMidiArray');
+const {numToNote} = require('../server/script/noteUtilities');
 
 // const  = main;
 
