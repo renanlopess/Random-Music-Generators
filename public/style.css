@@ -40,6 +40,7 @@ nav a {
   margin: 8px 6px 0 6px;
   font-size: 1.5em;
   font-weight: bold;
+  text-align: center;
 }
 
 /* later - after login/logout available */
@@ -67,7 +68,7 @@ nav a {
 
 /* MAIN CONTENT */
 
-
+/* Melody */
 #result-wrapper {
   width: 100%;
 }
@@ -143,7 +144,23 @@ nav a {
 } 
 */
 
+/* Rhythm */
+.rhythm-container, .rhythm-main-form {
+  width: fit-content;
+  margin: 0 auto;
+}
 
+.rhythm-main-form {
+  text-align: center;
+}
+
+.rhythm-info-popup {
+  font-size: 18px;
+  padding-left: 10px;
+  display: inline-block;
+  vertical-align: top;
+}
+  
 /* change to 950 after adding more links */
 @media screen and (max-width: 767px) {
   .nav-menu-main {
