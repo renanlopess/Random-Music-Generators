@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { Input, Menu } from 'semantic-ui-react';
 // import Subnav from './subnav';
 import { logout } from '../../store';
@@ -21,8 +21,25 @@ const mainLinks = [
 
 const DEFAULT_NAV_STATE = mainLinks[0].name;
 
+/* Global mainLinks */
+const validateRoute = (currentRouteSlice) =>
+  mainLinks.find(link => link.name === currentRouteSlice);
+
+
 class Navbar extends Component {
-  state = { activeItem: DEFAULT_NAV_STATE }
+  constructor(props) {
+    super(props);
+    this.state = { activeItem: DEFAULT_NAV_STATE };
+  }
+
+  componentDidMount() {
+    /* A silly workaround to make sure that the active nav is correct */
+    const currentRoute = this.props.location.pathname.slice(1);
+    console.log(currentRoute)
+    if (validateRoute(currentRoute)) {
+      this.setState({ activeItem: currentRoute });// eslint-disable-line react/no-did-mount-set-state
+    }
+  }
 
   handleItemClick = (event, { name }) => {
     this.setState({ activeItem: name });
@@ -106,7 +123,7 @@ const mapDispatch = dispatch => {
   };
 };
 
-export default connect(mapState, mapDispatch)(Navbar);
+export default withRouter(connect(mapState, mapDispatch)(Navbar));
 
 /**
  * PROP TYPES
