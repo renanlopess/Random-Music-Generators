@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import PreviewMelody from './PreviewMelody';
+// import PreviewMelody from './PreviewMelody';
 import { Table } from 'semantic-ui-react';
-import getRowMap from '../../script/getRowMap';
+import getRowMap from '../../../server/script/getRowMap';
 
 /**
  * COMPONENT

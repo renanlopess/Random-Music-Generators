@@ -2,7 +2,6 @@ const MidiWriter = require('midi-writer-js');
 const createRandomMelody = require('./createRandomMelody');
 const {numToNote} = require('./noteUtilities');
 
-/*eslint-disable complexity*/
 // called when 'generate' is clicked
 function generateMidiArray({
   tonality = 'diatonic',
@@ -12,11 +11,11 @@ function generateMidiArray({
   rhythmValues = 4,
   midiQuantity = 2
 } = {}) {
-  let results = [];
+  const results = [];
   for (let i = 0; i < midiQuantity; i++) {
-    let midiCodeArray = createRandomMelody({ tonality, pitchRange, midiLength, intervalJump });
-    let pitchNamesWithOctave = midiCodeArray.map(num => numToNote(num));
-    let midiFile = createMidiFile(midiCodeArray, rhythmValues);
+    const midiCodeArray = createRandomMelody({ tonality, pitchRange, midiLength, intervalJump });
+    const pitchNamesWithOctave = midiCodeArray.map(num => numToNote(num));
+    const midiFile = createMidiFile(midiCodeArray, rhythmValues);
     results.push({
       midiCodeArray, pitchNamesWithOctave, midiFile
     });
@@ -25,17 +24,17 @@ function generateMidiArray({
 }
 
 function createMidiFile(midiCodeArray, rhythmValues) {
-  let track = new MidiWriter.Track();
-  let noteArray = [];
+  const track = new MidiWriter.Track();
+  const noteArray = [];
   for (let j = 0; j < midiCodeArray.length; j++) {
-    let pitch = [midiCodeArray[j]];
-    let duration = rhythmValues || 2;
-    let note = new MidiWriter.NoteEvent({ pitch, duration });
+    const pitch = [midiCodeArray[j]];
+    const duration = rhythmValues || 2;
+    const note = new MidiWriter.NoteEvent({ pitch, duration });
     noteArray.push(note);
   }
   track.addEvent(noteArray);
-  let write = new MidiWriter.Writer([track]);
-  let file = write.dataUri();
+  const write = new MidiWriter.Writer([track]);
+  const file = write.dataUri();
   return file;
 }
 

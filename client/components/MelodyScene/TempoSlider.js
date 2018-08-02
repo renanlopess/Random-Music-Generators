@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { Table, Button, Icon, Modal } from 'semantic-ui-react';
 import { Slider } from 'react-semantic-ui-range';
-import { changeTempo } from '../store/melody';
+import { changeTempo } from '../../store/melody';
 
 /**
  * COMPONENT

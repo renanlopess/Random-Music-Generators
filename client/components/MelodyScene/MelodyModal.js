@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Icon, Modal } from 'semantic-ui-react';
 import PreviewMelody from './PreviewMelody';
-import { selectMelody, removeMelody } from '../store/melody';
+import { selectMelody, removeMelody } from '../../store/melody';
 
 /**
  * COMPONENT
@@ -31,9 +31,12 @@ export class MelodyModal extends Component {
   };
 
   render() {
+    const modalSizeProp = {};
+    if (this.state.fullscreen) {
+      modalSizeProp.size = 'fullscreen';
+    }
     return (
       <Modal
-        size={this.state.fullscreen ? 'fullscreen' : ''}
         open={this.state.modalOpen}
         onClose={this.handleClose}
         trigger={
@@ -42,6 +45,7 @@ export class MelodyModal extends Component {
             labelPosition="left"
             color="blue"
             onClick={() => this.handleOpen(this.props.midiDataObject)}
+            {...modalSizeProp}
           >
             <Icon name="play" />
             PREVIEW

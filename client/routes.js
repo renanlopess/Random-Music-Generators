@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter, Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {Login, Signup, UserHome, Home} from './components';
+import {Login, Signup, UserHome} from './components/UserScenes';
+import Melody from './components/MelodyScene';
+import Rhythm from './components/RhythmScene';
 import {me} from './store';
 
 /**
@@ -28,8 +30,10 @@ class Routes extends Component {
               <Route path="/profile" component={UserHome} />
             </Switch>
         }
+        <Route path="/melody" component={Melody} />
+        <Route path="/rhythm" component={Rhythm} />
         {/* Displays our Login component as a fallback */}
-        <Route component={Home} />
+        <Route component={Melody} />
       </Switch>
     );
   }
