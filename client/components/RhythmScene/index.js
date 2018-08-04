@@ -3,6 +3,7 @@ import Rhythm from './Rhythm';
 export default Rhythm;
 
 export {default as InfoPopup} from './InfoPopup';
+export {default as RhythmResult} from './RhythmResult';
 // export {default as MelodyResult} from './MelodyResult';
 // export {default as NoteGrid} from './NoteGrid';
 // export {default as PreviewMelody} from './PreviewMelody';

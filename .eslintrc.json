@@ -4,6 +4,12 @@
 	"extends": "fullstack",
 	"rules": {
 		"semi": [1, "always"],
-		"new-cap": [1, { "capIsNewExceptions": ["Router"] }]
+		"new-cap": [1, { "capIsNewExceptions": ["Router"] }],
+		"max-len": [
+			"warn",
+			{
+				"code": 90
+			}
+		]
 	}
 }

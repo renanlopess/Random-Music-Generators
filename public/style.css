@@ -55,15 +55,17 @@ nav a {
 
 .nav-menu-main .ui.secondary.menu .active.item {
   background: transparent;
-  color: #a333c8;/*theme purple*/
+  color: #a333c8; /*theme purple*/
   border-radius: 6px;
   border: 1px solid transparent;
   border-bottom-color: #a333c8;
 }
 
-.ui.secondary.menu .dropdown.item:hover, .ui.secondary.menu .link.item:hover, .ui.secondary.menu a.item:hover {
+.ui.secondary.menu .dropdown.item:hover,
+.ui.secondary.menu .link.item:hover,
+.ui.secondary.menu a.item:hover {
   background: transparent;
-  color: #a333c8;/*theme purple*/
+  color: #a333c8; /*theme purple*/
 }
 
 /* MAIN CONTENT */
@@ -81,7 +83,6 @@ nav a {
 .ui.table tr.active {
   background: #fa26d9 !important;
 }
-
 
 /* .melody-main-wrapper */
 .melody-main-wrapper {
@@ -108,14 +109,13 @@ nav a {
 
 /* Melody Submit Button */
 .melody-main-form > .field:last-child {
-    text-align: center;
+  text-align: center;
 }
 
 #main-submit {
   display: inline-block;
   width: 150px;
 }
-
 
 .result-single > .ui.table {
   width: 100%;
@@ -145,9 +145,11 @@ nav a {
 */
 
 /* Rhythm */
-.rhythm-container, .rhythm-main-form {
+.rhythm-container,
+.rhythm-main-form {
   width: fit-content;
   margin: 0 auto;
+  padding: 0 12px;
 }
 
 .rhythm-main-form {
@@ -160,7 +162,46 @@ nav a {
   display: inline-block;
   vertical-align: top;
 }
-  
+
+.rhythm-output {
+  margin-top: 16px;
+}
+
+.rhythm-output div {
+  margin-bottom: 16px;
+  padding: 0 0 0 8px;
+  font-size: 16px;
+}
+
+.rhythm-output h1 {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.rhythm-output table.ui.table {
+  margin: 0 0 24px 0;
+  padding: 0;
+  border: none;
+  border-collapse: collapse;
+}
+
+.rhythm-output table.ui.table td {
+  border-style: hidden;
+  padding: 0 8px;
+}
+
+.rhythm-output table.ui.table button.ui.button {
+  padding: 14px !important;
+}
+
+.rhythm-output table.ui.table button.ui.button > i.icon {
+  width: 28px;
+}
+
+.rhythm-output img {
+  height: 38px;
+}
+
 /* change to 950 after adding more links */
 @media screen and (max-width: 767px) {
   .nav-menu-main {
@@ -175,7 +216,7 @@ nav a {
 
 @media only screen and (max-width: 767px) {
   .nav-menu-main .ui.stackable.menu .item {
-      width: auto !important;/* override semantic */
+    width: auto !important; /* override semantic */
   }
 }
 
@@ -183,15 +224,14 @@ nav a {
   .img-logo {
     width: 20px;
   }
-  
+
   .txt-logo {
     font-size: 1.2em;
   }
 }
-  
+
 @media screen and (max-width: 350px) {
   .txt-logo {
     width: 56%;
   }
 }
-  

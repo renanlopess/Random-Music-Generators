@@ -46,7 +46,7 @@ const RHYTHM_MAP = {
   '1/16': 1 / 16,
   '3/16': 3 / 16,
   '1/24': 1 / 24,
-  '5/24': 5 / 24,
+  '5/24': 5 / 24
 };
 
 const TIME_SIGNATURE_OPTIONS = new Set([
@@ -59,68 +59,43 @@ const TIME_SIGNATURE_OPTIONS = new Set([
   '11/4',
   '12/4',
   '13/4',
-  '15/4',
+  '15/4'
 ]);
 
 // 8 - duple8. 16 - duple16. 8t - triplet8. 16t - triple16. mixed - mixed.
 const RHYTHM_OPTIONS = {
   8: {
     name: '8th Note',
-    values: [
-    '1/2',
-    '1/4',
-    '3/4',
-    '1/8',
-    '3/8',
-  ]},
+    values: ['1/2', '1/4', '3/4', '1/8', '3/8']
+  },
   16: {
     name: '16th Note',
-    values: [
-    '1/2',
-    '1/4',
-    '3/4',
-    '1/8',
-    '3/8',
-    '1/16',
-    '3/16',
-  ]},
+    values: ['1/2', '1/4', '3/4', '1/8', '3/8', '1/16', '3/16']
+  },
   '8t': {
     name: '8th Note Triplet',
-    values: [
-    '1/2',
-    '1/4',
-    '3/4',
-    '1/6',
-    '1/12',
-  ]},
+    values: ['1/2', '1/4', '3/4', '1/6', '1/12']
+  },
   '16t': {
     name: '16th Note Triplet',
-    values: [
-    '1/2',
-    '1/4',
-    '1/8',
-    '3/8',
-    '1/12',
-    '1/24',
-    '3/4',
-    '1/6',
-    '5/24',
-  ]},
+    values: ['1/2', '1/4', '1/8', '3/8', '1/12', '1/24', '3/4', '1/6', '5/24']
+  },
   mixed: {
     name: 'Mixed',
     values: [
-    '1/2',
-    '1/4',
-    '1/8',
-    '3/8',
-    '1/12',
-    '1/16',
-    '1/24',
-    '3/4',
-    '1/6',
-    '3/16',
-    '5/24'
-  ]}
+      '1/2',
+      '1/4',
+      '1/8',
+      '3/8',
+      '1/12',
+      '1/16',
+      '1/24',
+      '3/4',
+      '1/6',
+      '3/16',
+      '5/24'
+    ]
+  }
 };
 
 // Random choice of element from array
@@ -140,17 +115,25 @@ function createRhythms(timeSigString, rhythmTypeString) {
   const now = Date.now();
   const timeout = 500;
   // const rhythmArray = [];
-  const rhythmSet = new Set();
+  const rhythmSet = new Set(); //for validation only
+  const rhythmArray = [];
   while (Date.now() < now + timeout) {
     if (rhythmSet.size >= 200) {
       break;
     }
     const curRhythm = getRandomRhythmMeasure(noteValues, timeSigString, timeSigValue);
-    if (curRhythm.length > 5) {
-      rhythmSet.add(curRhythm);// ignores duplicates
+    // console.log({curRhythm, rhythmSet, rhythmArray});
+    if (curRhythm.length > 1) {
+      const curRhythmString = curRhythm.join(' ');
+      // console.log({curRhythmString});
+      if (!rhythmSet.has(curRhythmString)) {
+        rhythmSet.add(curRhythmString); // ignores duplicates
+        rhythmArray.push(curRhythm);
+      }
     }
   }
-  return Array.from(rhythmSet);
+  // return Array.from(rhythmSet);
+  return rhythmArray;
 }
 
 function getRandomRhythmMeasure(noteValues, timeSigString, timeSigValue) {
@@ -170,24 +153,26 @@ function getRandomRhythmMeasure(noteValues, timeSigString, timeSigValue) {
     }
     noteArray.push(randomNoteStr);
     measureCalculation += randomNoteValue;
-    if ((timeSigValue - measureCalculation) === 0) // Perfect rhythm, fits in measure.
-    {
-      return noteArray.join(' ');
+    if (timeSigValue - measureCalculation === 0) {
+      // Perfect rhythm, fits in measure.
+      return noteArray;
     }
-    if ((timeSigValue - measureCalculation) < 0) // Imperfect rhythm, over the barline.
-    {
-      return '';
+    if (timeSigValue - measureCalculation < 0) {
+      // Imperfect rhythm, over the barline.
+      return [];
     }
   }
 }
 
 function getRhythmHeading(rhythmArrayLength, rhythmTypeSelection, timeSigString) {
-  return `${rhythmArrayLength} Measures of Random ${RHYTHM_OPTIONS[rhythmTypeSelection].name} Rhythms in ${timeSigString}`
+  return `${rhythmArrayLength} Measures of Random ${
+    RHYTHM_OPTIONS[rhythmTypeSelection].name
+  } Rhythms in ${timeSigString}`;
 }
 
 function getRhythmDisplay(rhythmArray, rhythmTypeSelection, timeSigString) {
   // converts array to string output
-  const rhythmArrayLength = rhythmArray.length
+  const rhythmArrayLength = rhythmArray.length;
   return `${getRhythmHeading(rhythmArrayLength, rhythmTypeSelection, timeSigString)}
 Guide to rhythmic values: 1/2 = half note. 1/4 = quarter note. 3/4 = dotted half note. 1/8 = eighth note. 3/8 = dotted quarter note. 1/16 = sixteenth note. 3/16 = dotted 8th note. 1/6 = quarter note triplet (2 tied 8th note triplets). 1/12 = 8th note triplet. 1/24 = 16th note triplet. 5/24 = 8th note tied to an 8th note triplet.
 ${rhythmArray.join('\n')}`;
