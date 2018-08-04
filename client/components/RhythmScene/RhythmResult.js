@@ -1,20 +1,25 @@
 import React from 'react';
+import uniqueId from 'lodash.uniqueid';
 import { Table } from 'semantic-ui-react';
 
 const RhythmResult = props => {
-  let { rhythmMeasure } = props;
-  rhythmMeasure = rhythmMeasure.split(' ');
+  const { rhythmMeasure, num, children } = props;
+  // rhythmMeasure = rhythmMeasure.split(' ');
   return (
     <Table basic="very" collapsing unstackable>
       <Table.Body>
         <Table.Row>
-          {rhythmMeasure.map(rhythm => <Table.Cell>{rhythm}</Table.Cell>)}
+          <Table.Cell>{num}.</Table.Cell>
+          {rhythmMeasure.map(rhythm => (
+            <Table.Cell key={uniqueId('rhythmMeasure')}>{rhythm}</Table.Cell>
+          ))}
         </Table.Row>
         <Table.Row>
+          <Table.Cell>{children}</Table.Cell>
           {rhythmMeasure.map(rhythm => {
             const [top, bottom] = rhythm.split('/');
             return (
-              <Table.Cell>
+              <Table.Cell key={uniqueId('rhythmMeasureImg')}>
                 <img src={`img/rhythm/rhythm-${top}-${bottom}.png`} />
               </Table.Cell>
             );

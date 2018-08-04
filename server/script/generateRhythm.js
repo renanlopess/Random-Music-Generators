@@ -115,17 +115,25 @@ function createRhythms(timeSigString, rhythmTypeString) {
   const now = Date.now();
   const timeout = 500;
   // const rhythmArray = [];
-  const rhythmSet = new Set();
+  const rhythmSet = new Set(); //for validation only
+  const rhythmArray = [];
   while (Date.now() < now + timeout) {
     if (rhythmSet.size >= 200) {
       break;
     }
     const curRhythm = getRandomRhythmMeasure(noteValues, timeSigString, timeSigValue);
-    if (curRhythm.length > 5) {
-      rhythmSet.add(curRhythm); // ignores duplicates
+    // console.log({curRhythm, rhythmSet, rhythmArray});
+    if (curRhythm.length > 1) {
+      const curRhythmString = curRhythm.join(' ');
+      // console.log({curRhythmString});
+      if (!rhythmSet.has(curRhythmString)) {
+        rhythmSet.add(curRhythmString); // ignores duplicates
+        rhythmArray.push(curRhythm);
+      }
     }
   }
-  return Array.from(rhythmSet);
+  // return Array.from(rhythmSet);
+  return rhythmArray;
 }
 
 function getRandomRhythmMeasure(noteValues, timeSigString, timeSigValue) {
@@ -147,11 +155,11 @@ function getRandomRhythmMeasure(noteValues, timeSigString, timeSigValue) {
     measureCalculation += randomNoteValue;
     if (timeSigValue - measureCalculation === 0) {
       // Perfect rhythm, fits in measure.
-      return noteArray.join(' ');
+      return noteArray;
     }
     if (timeSigValue - measureCalculation < 0) {
       // Imperfect rhythm, over the barline.
-      return '';
+      return [];
     }
   }
 }

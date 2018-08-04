@@ -5,7 +5,15 @@ const { expect } = require('chai');
 // import React from 'react';
 // import enzyme, {shallow} from 'enzyme';
 // import Adapter from 'enzyme-adapter-react-16';
-const { createRhythms, getRandomRhythmMeasure, getRhythmDisplay, RHYTHM_MAP, TIME_SIGNATURE_OPTIONS, validateRhythmInputs, isBoringRhythm } = require('../script/generateRhythm');
+const {
+  createRhythms,
+  getRandomRhythmMeasure,
+  getRhythmDisplay,
+  RHYTHM_MAP,
+  TIME_SIGNATURE_OPTIONS,
+  validateRhythmInputs,
+  isBoringRhythm
+} = require('../script/generateRhythm');
 
 // const adapter = new Adapter();
 // enzyme.configure({adapter});
@@ -24,9 +32,11 @@ const doRhythmTests = (timeSigString, rhythmTypeString) => {
 const doMeasureTests = (rhythmChoices, timeSigString, timeSigValue) => {
   const rhythmChoicesSet = new Set(rhythmChoices);
   const randMeasure = getRandomRhythmMeasure(rhythmChoices, timeSigString, timeSigValue);
-  expect(typeof randMeasure === 'string').to.equal(true);
-  expect(randMeasure.length > 2).to.equal(true);
-  randMeasure.split(' ').forEach(note => {
+  // expect(typeof randMeasure === 'string').to.equal(true);
+  expect(Array.isArray(randMeasure)).to.equal(true);
+  // expect(randMeasure.length > 2).to.equal(true);
+  expect(randMeasure.length > 1).to.equal(true);
+  randMeasure.forEach(note => {
     expect(rhythmChoicesSet.has(note)).to.equal(true);
   });
 };
@@ -38,14 +48,14 @@ describe('generateRhythm', () => {
 
   it('gets all the rhythms for createRhythms before timeout', () => {
     // this test takes a while to run
-    const rhythms34 = createRhythms('3/4', '8');// 24
-    // console.log(rhythms.length, rhythms);
+    const rhythms34 = createRhythms('3/4', '8'); // 24
+    // console.log(rhythms34.length, rhythms34);
     expect(rhythms34.length).to.equal(24);
-    const rhythms44 = createRhythms('4/4', '8');// 113
-    // console.log(rhythms.length, rhythms);
+    const rhythms44 = createRhythms('4/4', '8'); // 113
+    // console.log(rhythms44.length, rhythms44);
     expect(rhythms44.length).to.be.within(112, 113);
     TIME_SIGNATURE_ARRAY.forEach(timeSig => {
-      // doRhythmTests(timeSig, 8);
+      doRhythmTests(timeSig, 8);
     });
   }).timeout(0);
 
@@ -118,7 +128,11 @@ describe('generateRhythm', () => {
     ];
     toTest.forEach(item => {
       const rhythmArray = createRhythms(item.timeSigString, item.rhythmType);
-      const display = getRhythmDisplay(rhythmArray.slice(0, 10), item.rhythmType, item.timeSigString);
+      const display = getRhythmDisplay(
+        rhythmArray.slice(0, 10),
+        item.rhythmType,
+        item.timeSigString
+      );
       // console.log(display)
       expect(display.includes(item.message)).to.equal(true);
       expect(display.includes(rhythmArray[0])).to.equal(true);

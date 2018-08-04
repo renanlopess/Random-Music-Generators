@@ -163,35 +163,42 @@ nav a {
   vertical-align: top;
 }
 
+.rhythm-output {
+  margin-top: 16px;
+}
+
 .rhythm-output div {
-  padding-left: 8px;
-}
-
-.rhythm-output ol {
-  list-style-position: outside;
-  margin: 0;
-  padding: 0;
-}
-
-.rhythm-output li {
   margin-bottom: 16px;
-  padding: 0 0 0 24px;
+  padding: 0 0 0 8px;
   font-size: 16px;
 }
 
-.rhythm-output li table.ui.table {
-  margin: 0;
+.rhythm-output h1 {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.rhythm-output table.ui.table {
+  margin: 0 0 24px 0;
   padding: 0;
   border: none;
   border-collapse: collapse;
 }
 
-.rhythm-output li table.ui.table td {
+.rhythm-output table.ui.table td {
   border-style: hidden;
   padding: 0 8px;
 }
 
-.rhythm-output li img {
+.rhythm-output table.ui.table button.ui.button {
+  padding: 14px !important;
+}
+
+.rhythm-output table.ui.table button.ui.button > i.icon {
+  width: 28px;
+}
+
+.rhythm-output img {
   height: 38px;
 }
 
@@ -210,10 +217,6 @@ nav a {
 @media only screen and (max-width: 767px) {
   .nav-menu-main .ui.stackable.menu .item {
     width: auto !important; /* override semantic */
-  }
-
-  .rhythm-output div {
-    padding-left: 24px;
   }
 }
 

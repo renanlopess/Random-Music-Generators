@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Form, Select, Button, Icon } from 'semantic-ui-react';
-// import MelodyResult from './MelodyResult';
+import uniqueId from 'lodash.uniqueid';
 import { getMelodies } from '../../store/melodies';
 // import { generateMidiArray } from '../../../server/script/generateMidiArray';
 import InfoPopup from './InfoPopup';
@@ -13,13 +13,11 @@ import {
   createRhythms,
   getRhythmHeading
 } from '../../../server/script/generateRhythm';
-
-// import player from './doremifa_react';
 import createRhythmTrack from './bandjsRhythmTrack';
 
-const testMeasure = '3/8 1/8 1/12 1/24 3/8 1/8 1/24 3/8 5/24';
+// const testMeasure = '3/8 1/8 1/12 1/24 3/8 1/8 1/24 3/8 5/24';
 // const testMeasure = '1/16 1/16 1/16 3/16 3/8 1/4';
-const testTimeSig = '7/4';
+// const testTimeSig = '7/4';
 
 const INITIAL_FORM_VALUES = {
   rhythmType: '8',
@@ -63,11 +61,10 @@ export class Rhythm extends Component {
     });
   };
 
-  playRhythm = rhythmString => {
-    // console.log('rhythm player', this.player);
+  playRhythm = rhythmArray => {
     this.stopPlayer();
     const { timeSig } = this.state;
-    this.player = createRhythmTrack(timeSig, rhythmString);
+    this.player = createRhythmTrack(timeSig, rhythmArray);
     setTimeout(() => {
       // this.loopPlayer();
       this.player.play();
@@ -94,7 +91,6 @@ export class Rhythm extends Component {
 
   render() {
     // const { email } = this.props;
-    // console.log('melody props', this.props, this.state);
     // console.log('rhythm props', this.props, this.state, this.player);
     const {
       rhythmType,
@@ -138,38 +134,39 @@ export class Rhythm extends Component {
               <InfoPopup />
             </h1>
             <div>
-              <ol>
-                {submittedRhythmArray.map((rhythm, i) => {
-                  return (
-                    <li key={i}>
-                      <RhythmResult rhythmMeasure={rhythm} />
-                      {this.player && this.player.playing ? (
-                        <Button
-                          icon
-                          labelPosition="left"
-                          color="blue"
-                          onClick={() => {
-                            this.stopPlayer();
-                          }}
-                        >
-                          <Icon name="stop" />
-                        </Button>
-                      ) : (
-                        <Button
-                          icon
-                          labelPosition="left"
-                          color="blue"
-                          onClick={() => {
-                            this.playRhythm(rhythm);
-                          }}
-                        >
-                          <Icon name="play" />
-                        </Button>
-                      )}
-                    </li>
-                  );
-                })}
-              </ol>
+              {submittedRhythmArray.map((rhythmArray, i) => {
+                return (
+                  <RhythmResult
+                    key={uniqueId('submittedRhythmArray')}
+                    rhythmMeasure={rhythmArray}
+                    num={i + 1}
+                  >
+                    <Button
+                      icon
+                      labelPosition="left"
+                      color="blue"
+                      onClick={() => {
+                        this.playRhythm(rhythmArray);
+                      }}
+                    >
+                      <Icon name="play" />
+                    </Button>
+                    <Button
+                      icon
+                      labelPosition="left"
+                      color="blue"
+                      onClick={() => {
+                        this.stopPlayer();
+                      }}
+                    >
+                      <Icon name="stop" />
+                    </Button>
+                    <Button icon labelPosition="left" color="black">
+                      <Icon name="download" />
+                    </Button>
+                  </RhythmResult>
+                );
+              })}
             </div>
           </div>
         )}
@@ -192,7 +189,10 @@ const mapDispatch = {
   getMelodies
 };
 
-export default connect(mapState, mapDispatch)(Rhythm);
+export default connect(
+  mapState,
+  mapDispatch
+)(Rhythm);
 
 /*
       <strong>state:</strong>

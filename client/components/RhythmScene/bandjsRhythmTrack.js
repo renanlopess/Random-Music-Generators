@@ -1,35 +1,40 @@
 const BandJS = require('../../lib/band.min');
 
-const createRhythmTrack = (timeSig, rhythmString) => {
+const createRhythmTrack = (timeSig, rhythmArray) => {
   // parse timeSig and rhythmString
   const [topTime, bottomTime] = timeSig.split('/');
-  const rhythmArray = rhythmString.split(' ');
 
   const conductor = new BandJS('equalTemperament', 'fractions');
   conductor.setTimeSignature(+topTime, +bottomTime);
   conductor.setTempo(60);
-  const piano = conductor.createInstrument('square', 'oscillators');
-  const drum = conductor.createInstrument('white', 'noises');
+
+  /**
+   * 'sin', 'square', 'sawtooth', 'triangle'
+   */
+  const piano = conductor.createInstrument('sawtooth', 'oscillators');
+  const drum = conductor.createInstrument('brown', 'noises');
   const highTime = conductor.createInstrument('sine', 'oscillators');
-  piano.setVolume(12);
-  highTime.setVolume(4);
-  drum.setVolume(4);
+  piano.setVolume(20);
+  highTime.setVolume(5);
+  drum.setVolume(50);
 
   const tie = false;
 
   rhythmArray.forEach(rhythm => {
-    piano.note(rhythm, 'C4, C5', tie);
+    piano.note(rhythm, 'C3, C4', tie);
   });
 
   piano.repeat(1);
 
   for (let i = 0; i < +topTime; i++) {
     if (i === 0) {
-      highTime.note('1/16', 'G7, C8');
+      highTime.note('1/16', 'C8');
       drum.note('1/16');
     } else {
-      highTime.note('1/16', 'C7');
-      drum.rest('1/16');
+      // highTime.note('1/16', 'C7');
+      highTime.rest('1/16');
+      // drum.rest('1/16');
+      drum.note('1/16');
     }
     highTime.rest('3/16');
     drum.rest('3/16');
