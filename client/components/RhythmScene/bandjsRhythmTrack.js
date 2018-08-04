@@ -11,8 +11,8 @@ const createRhythmTrack = (timeSig, rhythmString) => {
   const piano = conductor.createInstrument('square', 'oscillators');
   const drum = conductor.createInstrument('white', 'noises');
   const highTime = conductor.createInstrument('sine', 'oscillators');
-  piano.setVolume(10);
-  highTime.setVolume(8);
+  piano.setVolume(12);
+  highTime.setVolume(4);
   drum.setVolume(4);
 
   const tie = false;
@@ -25,7 +25,7 @@ const createRhythmTrack = (timeSig, rhythmString) => {
 
   for (let i = 0; i < +topTime; i++) {
     if (i === 0) {
-      highTime.note('1/16', 'C7, G7, C8');
+      highTime.note('1/16', 'G7, C8');
       drum.note('1/16');
     } else {
       highTime.note('1/16', 'C7');
