@@ -5,6 +5,7 @@ import { Form, Select, Button, Icon } from 'semantic-ui-react';
 import uniqueId from 'lodash.uniqueid';
 import { getMelodies } from '../../store/melodies';
 // import { generateMidiArray } from '../../../server/script/generateMidiArray';
+import { TempoSlider } from '../MelodyScene';
 import InfoPopup from './InfoPopup';
 import RhythmResult from './RhythmResult';
 import {
@@ -21,7 +22,8 @@ import createRhythmTrack from './bandjsRhythmTrack';
 
 const INITIAL_FORM_VALUES = {
   rhythmType: '8',
-  timeSig: '3/4'
+  timeSig: '3/4',
+  tempo: 60
 };
 
 const rhythmTypeOptions = Object.keys(RHYTHM_OPTIONS).map(item => {
@@ -45,8 +47,17 @@ export class Rhythm extends Component {
     this.player = null;
   }
 
+  componentWillUnmount() {
+    this.stopPlayer();
+    this.player = null;
+  }
+
   handleChange = (evt, { name, value }) => {
     this.setState({ [name]: value });
+  };
+
+  handleTempoChange = value => {
+    this.setState({ tempo: value });
   };
 
   handleSubmit = evt => {
@@ -63,8 +74,8 @@ export class Rhythm extends Component {
 
   playRhythm = rhythmArray => {
     this.stopPlayer();
-    const { timeSig } = this.state;
-    this.player = createRhythmTrack(timeSig, rhythmArray);
+    const { timeSig, tempo } = this.state;
+    this.player = createRhythmTrack(timeSig, rhythmArray, tempo);
     setTimeout(() => {
       // this.loopPlayer();
       this.player.play();
@@ -97,7 +108,8 @@ export class Rhythm extends Component {
       timeSig,
       submittedRhythmType,
       submittedTimeSig,
-      submittedRhythmArray
+      submittedRhythmArray,
+      tempo
     } = this.state;
 
     return (
@@ -120,10 +132,18 @@ export class Rhythm extends Component {
               value={rhythmType}
               onChange={this.handleChange}
             />
+            <Form.Field style={{ width: '196px' }}>
+              <label>Tempo: {tempo}</label>
+              <TempoSlider
+                settings={{ tooltip: false }}
+                handleChange={this.handleTempoChange}
+                value={tempo}
+              />
+            </Form.Field>
           </Form.Group>
-          <Form.Button color="purple" content="Submit" id="main-submit" />
+          <Form.Button color="purple" content="Submit" className="button-main-submit" />
         </Form>
-        {submittedRhythmArray.length && (
+        {submittedRhythmArray.length ? (
           <div className="rhythm-output">
             <h1>
               {getRhythmHeading(
@@ -169,7 +189,7 @@ export class Rhythm extends Component {
               })}
             </div>
           </div>
-        )}
+        ) : null}
       </div>
     );
   }

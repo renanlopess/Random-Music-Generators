@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Form, Select } from 'semantic-ui-react';
 import MelodyResult from './MelodyResult';
-import {getMelodies} from '../../store/melodies';
+import { getMelodies } from '../../store/melodies';
 import { generateMidiArray } from '../../../server/script/generateMidiArray';
+
+const propTypes = {
+  getMelodies: PropTypes.func.isRequired
+};
 
 const INITIAL_FORM_VALUES = {
   tonality: 'diatonic',
@@ -17,7 +21,7 @@ const INITIAL_FORM_VALUES = {
 
 const tonalityOptions = [
   { key: 'diatonic', text: 'Diatonic', value: 'diatonic' },
-  { key: 'chromatic', text: 'Chromatic', value: 'chromatic' },
+  { key: 'chromatic', text: 'Chromatic', value: 'chromatic' }
 ];
 
 const lengthValueOptions = [
@@ -36,42 +40,95 @@ const lengthValueOptions = [
 export class Melody extends Component {
   constructor(props) {
     super(props);
-    this.state = {...INITIAL_FORM_VALUES};
+    this.state = { ...INITIAL_FORM_VALUES };
   }
 
   handleChange = (evt, { name, value }) => {
-    this.setState({[name]: value});
-  }
+    this.setState({ [name]: value });
+  };
 
-  handleSubmit = (evt) => {
+  handleSubmit = evt => {
     evt.preventDefault();
     const midiArray = generateMidiArray(this.state);
     this.props.getMelodies(midiArray);
-  }
+  };
 
   render() {
     // const { email } = this.props;
     // console.log('melody props', this.props, this.state);
-    const { tonality, pitchRange, intervalJump, rhythmValues, midiLength, midiQuantity } = this.state;
+    const {
+      tonality,
+      pitchRange,
+      intervalJump,
+      rhythmValues,
+      midiLength,
+      midiQuantity
+    } = this.state;
 
     return (
       <div className="melody-main-wrapper">
-          <Form onSubmit={this.handleSubmit} className="melody-main-form">
-            <Form.Group >
-              <Form.Field control={Select} label="Tonality Options" options={tonalityOptions} name="tonality" value={tonality} onChange={this.handleChange} />
-              <Form.Field control={Select} label="Note Durations" options={lengthValueOptions} name="rhythmValues" value={rhythmValues} onChange={this.handleChange} />
-              <Form.Input label="Note Range" name="pitchRange" placeholder="G3 G5" value={pitchRange} onChange={this.handleChange} />
-              <Form.Input label="Max Jump" name="intervalJump" value={intervalJump} placeholder="Min: 0, Max: 127" onChange={this.handleChange} />
-              <Form.Input type="number" label="No of Notes" name="midiLength" value={midiLength} placeholder="Min: 1, Max: 50" min={1} max={50} onChange={this.handleChange} />
-              <Form.Input type="number" label="No of Melodies" name="midiQuantity" value={midiQuantity} placeholder="Min: 1, Max: 20" min={1} max={20} onChange={this.handleChange} />
-            </Form.Group>
-            <Form.Button color="purple" content="Submit" id="main-submit" />
-          </Form>
-      <MelodyResult />
+        <Form onSubmit={this.handleSubmit} className="melody-main-form">
+          <Form.Group>
+            <Form.Field
+              control={Select}
+              label="Tonality Options"
+              options={tonalityOptions}
+              name="tonality"
+              value={tonality}
+              onChange={this.handleChange}
+            />
+            <Form.Field
+              control={Select}
+              label="Note Durations"
+              options={lengthValueOptions}
+              name="rhythmValues"
+              value={rhythmValues}
+              onChange={this.handleChange}
+            />
+            <Form.Input
+              label="Note Range"
+              name="pitchRange"
+              placeholder="G3 G5"
+              value={pitchRange}
+              onChange={this.handleChange}
+            />
+            <Form.Input
+              label="Max Jump"
+              name="intervalJump"
+              value={intervalJump}
+              placeholder="Min: 0, Max: 127"
+              onChange={this.handleChange}
+            />
+            <Form.Input
+              type="number"
+              label="No of Notes"
+              name="midiLength"
+              value={midiLength}
+              placeholder="Min: 1, Max: 50"
+              min={1}
+              max={50}
+              onChange={this.handleChange}
+            />
+            <Form.Input
+              type="number"
+              label="No of Melodies"
+              name="midiQuantity"
+              value={midiQuantity}
+              placeholder="Min: 1, Max: 20"
+              min={1}
+              max={20}
+              onChange={this.handleChange}
+            />
+          </Form.Group>
+          <Form.Button color="purple" content="Submit" className="button-main-submit" />
+        </Form>
+        <MelodyResult />
       </div>
     );
   }
 }
+
+Melody.propTypes = propTypes;
 
 /**
  * CONTAINER
@@ -87,7 +144,10 @@ const mapDispatch = {
   getMelodies
 };
 
-export default connect(mapState, mapDispatch)(Melody);
+export default connect(
+  mapState,
+  mapDispatch
+)(Melody);
 
 /*
       <strong>state:</strong>

@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button, Icon, Modal } from 'semantic-ui-react';
 import PreviewMelody from './PreviewMelody';
 import { selectMelody, removeMelody } from '../../store/melody';
 
-/**
- * COMPONENT
- */
+const propTypes = {
+  selectMelody: PropTypes.func.isRequired,
+  removeMelody: PropTypes.func.isRequired,
+  midiDataObject: PropTypes.object.isRequired
+};
 
 export class MelodyModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       modalOpen: false,
-      fullscreen: false,
+      fullscreen: false
     };
   }
   handleOpen = midiDataObject => {
@@ -31,20 +33,22 @@ export class MelodyModal extends Component {
   };
 
   render() {
+    const { fullscreen, modalOpen } = this.state;
+    const { midiDataObject } = this.props;
     const modalSizeProp = {};
-    if (this.state.fullscreen) {
+    if (fullscreen) {
       modalSizeProp.size = 'fullscreen';
     }
     return (
       <Modal
-        open={this.state.modalOpen}
+        open={modalOpen}
         onClose={this.handleClose}
         trigger={
           <Button
             icon
             labelPosition="left"
             color="blue"
-            onClick={() => this.handleOpen(this.props.midiDataObject)}
+            onClick={() => this.handleOpen(midiDataObject)}
             {...modalSizeProp}
           >
             <Icon name="play" />
@@ -61,6 +65,8 @@ export class MelodyModal extends Component {
   }
 }
 
+MelodyModal.propTypes = propTypes;
+
 /**
  * CONTAINER
  */
@@ -70,15 +76,22 @@ const mapState = state => {
   };
 };
 
-const mapDispatch = dispatch => {
-  return {
-    selectMelody(melody) {
-      return dispatch(selectMelody(melody));
-    },
-    removeMelody() {
-      return dispatch(removeMelody());
-    }
-  };
+const mapDispatch = {
+  selectMelody,
+  removeMelody
 };
+// const mapDispatch = dispatch => {
+//   return {
+//     selectMelody(melody) {
+//       return dispatch(selectMelody(melody));
+//     },
+//     removeMelody() {
+//       return dispatch(removeMelody());
+//     }
+//   };
+// };
 
-export default connect(mapState, mapDispatch)(MelodyModal);
+export default connect(
+  mapState,
+  mapDispatch
+)(MelodyModal);

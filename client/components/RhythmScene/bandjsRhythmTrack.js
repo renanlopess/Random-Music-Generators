@@ -1,12 +1,14 @@
 const BandJS = require('../../lib/band.min');
 
-const createRhythmTrack = (timeSig, rhythmArray) => {
-  // parse timeSig and rhythmString
+const createRhythmTrack = (timeSig, rhythmArray, tempo) => {
+  // parse timeSig and rhythmString. validate tempo
   const [topTime, bottomTime] = timeSig.split('/');
+  tempo = +tempo > 280 ? 280 : +tempo;
+  tempo = tempo < 45 ? 45 : tempo;
 
   const conductor = new BandJS('equalTemperament', 'fractions');
   conductor.setTimeSignature(+topTime, +bottomTime);
-  conductor.setTempo(60);
+  conductor.setTempo(tempo);
 
   /**
    * 'sin', 'square', 'sawtooth', 'triangle'
