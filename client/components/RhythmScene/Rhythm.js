@@ -132,13 +132,15 @@ export class Rhythm extends Component {
               value={rhythmType}
               onChange={this.handleChange}
             />
-            <Form.Field style={{ width: '196px' }}>
+            <Form.Field className="rhythm-main-form-tempo-field">
               <label>Tempo: {tempo}</label>
-              <TempoSlider
-                settings={{ tooltip: false }}
-                handleChange={this.handleTempoChange}
-                value={tempo}
-              />
+              <div className="rhythm-main-form-tempo-field-slider-container">
+                <TempoSlider
+                  settings={{ tooltip: false }}
+                  handleChange={this.handleTempoChange}
+                  value={tempo}
+                />
+              </div>
             </Form.Field>
           </Form.Group>
           <Form.Button color="purple" content="Submit" className="button-main-submit" />

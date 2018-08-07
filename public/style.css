@@ -164,6 +164,22 @@ nav a {
   padding: 0 12px;
 }
 
+.rhythm-main-form-tempo-field {
+  width: 196px;
+}
+
+/* not sold on this */
+.rhythm-main-form-tempo-field-slider-container {
+  border: 1px solid rgba(34,36,38,.15);
+  border-radius: 4px;
+  padding: 8px 2px;
+}
+
+.rhythm-main-form-tempo-field-slider-container .rangeslider {
+  margin: 4px;
+}
+
+/* Center button */
 .rhythm-main-form > .field:last-child {
     text-align: center;
 }
