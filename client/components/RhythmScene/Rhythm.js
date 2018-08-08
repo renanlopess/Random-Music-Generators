@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Form, Select, Button, Icon } from 'semantic-ui-react';
 import uniqueId from 'lodash.uniqueid';
 import { getMelodies } from '../../store/melodies';
-// import { generateMidiArray } from '../../../server/script/generateMidiArray';
+import { createRhythmMidiFile } from '../../../server/script/generateMidiArray';
 import { TempoSlider } from '../MelodyScene';
 import InfoPopup from './InfoPopup';
 import RhythmResult from './RhythmResult';
@@ -183,7 +183,14 @@ export class Rhythm extends Component {
                     >
                       <Icon name="stop" />
                     </Button>
-                    <Button icon labelPosition="left" color="black">
+                    <Button
+                      icon
+                      labelPosition="left"
+                      color="black"
+                      onClick={() => {
+                        window.location.href = createRhythmMidiFile(rhythmArray, tempo, timeSig);
+                      }}
+                    >
                       <Icon name="download" />
                     </Button>
                   </RhythmResult>
