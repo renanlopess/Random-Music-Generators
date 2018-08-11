@@ -2,57 +2,71 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import { Table, Button, Icon, Modal } from 'semantic-ui-react';
-import { Slider } from 'react-semantic-ui-range';
+// import { Slider } from 'react-semantic-ui-range';
+import Slider from 'react-rangeslider';
 import { changeTempo } from '../../store/melody';
 
-/**
- * COMPONENT
- */
+const propTypes = {
+  changeTempo: PropTypes.func.isRequired,
+  value: PropTypes.number.isRequired,
+  handleChange: PropTypes.func,
+  globalState: PropTypes.bool,
+  settings: PropTypes.object
+};
+
+const defaultProps = {
+  handleChange: () => {},
+  globalState: false,
+  settings: {}
+};
+
+const defaultSettings = {
+    min: 45,
+    max: 280,
+    step: 5,
+    tooltip: true
+  };
 
 export class TempoSlider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // tempo: this.props.melody.tempo
+      // tempo: props.melody.tempo
+      // value: 50
     };
   }
+
+  handleChange = value => {
+    if (this.props.globalState) {
+      this.props.changeTempo(value);
+    } else {
+      this.props.handleChange(value);
+    }
+    // this.setState({
+    //   value: value
+    // });
+  };
 
   render() {
     // const { rhythm, synth, sequence, transport, playing } = this.state;
     // console.log('preview state/props:', this.state, this.props);
-
-    const settings = {
-      start: 2,
-      min: 0,
-      max: 10,
-      step: 1
-    };
-
+    // console.log('TEMPO SLIDER', this.props);
+    const { settings, value } = this.props;
     return (
-      <div>
-        <span className="tempo-label">Tempo:</span>
         <Slider
-          color="purple"
-          inverted={true}
-          style={{width: '50%', margin: '0 auto'}}
-          settings={{
-            start: 105,
-            min: 45,
-            max: 280,
-            step: 5,
-            onChange: value => {
-              // console.log('value:', value)
-              this.props.changeTempo(+value);
-              // this.setState({
-              //   tempo: value
-              // });
-            }
-          }}
+          {...defaultSettings}
+          {...settings}
+          value={value}
+          // onChangeStart={this.handleChangeStart}
+          onChange={this.handleChange}
+          // onChangeComplete={this.handleChangeComplete}
         />
-      </div>
     );
   }
 }
+
+TempoSlider.propTypes = propTypes;
+TempoSlider.defaultProps = defaultProps;
 
 /**
  * CONTAINER
@@ -63,12 +77,28 @@ const mapState = state => {
   };
 };
 
-const mapDispatch = dispatch => {
-  return {
-    changeTempo(tempo) {
-      dispatch(changeTempo(tempo));
-    }
-  };
-};
+const mapDispatch = { changeTempo };
 
-export default connect(mapState, mapDispatch)(TempoSlider);
+export default connect(
+  mapState,
+  mapDispatch
+)(TempoSlider);
+
+/*
+        <Slider
+          color="purple"
+          inverted
+          className="tempo-slider"
+          style={{ width: '50%' }}
+          settings={{
+            ...settings,
+            onChange: value => {
+              // console.log('value:', value)
+              this.props.changeTempo(+value);
+              // this.setState({
+              //   tempo: value
+              // });
+            }
+          }}
+        />
+*/

@@ -1,10 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import uniqueId from 'lodash.uniqueid';
 import { Table } from 'semantic-ui-react';
 
+const defaultProps = {};
+
+const propTypes = {
+  rhythmMeasure: PropTypes.array.isRequired,
+  num: PropTypes.number.isRequired,
+  children: PropTypes.node.isRequired
+};
+
 const RhythmResult = props => {
   const { rhythmMeasure, num, children } = props;
-  // rhythmMeasure = rhythmMeasure.split(' ');
   return (
     <Table basic="very" collapsing unstackable>
       <Table.Body>
@@ -29,5 +37,9 @@ const RhythmResult = props => {
     </Table>
   );
 };
+
+RhythmResult.defaultProps = defaultProps;
+
+RhythmResult.propTypes = propTypes;
 
 export default RhythmResult;

@@ -71,7 +71,7 @@ describe('generateRhythm', () => {
     const keys = Object.keys(RHYTHM_MAP);
     keys.forEach(rhythm => {
       // eslint-disable-next-line no-eval
-      expect(eval(rhythm)).to.equal(RHYTHM_MAP[rhythm]);
+      expect(eval(rhythm)).to.equal(RHYTHM_MAP[rhythm].value);
     });
   });
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Icon, Popup, Grid } from 'semantic-ui-react';
 
+// eslint-disable-next-line max-len
 export const data = '1/2 = half note. 1/4 = quarter note. 3/4 = dotted half note. 1/8 = eighth note. 3/8 = dotted quarter note. 1/16 = sixteenth note. 3/16 = dotted 8th note. 1/6 = quarter note triplet (2 tied 8th note triplets). 1/12 = 8th note triplet. 1/24 = 16th note triplet. 5/24 = 8th note tied to an 8th note triplet'.split('. ');
 
 export const renderData = (dataArray) => {

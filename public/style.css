@@ -108,11 +108,15 @@ nav a {
 }
 
 /* Melody Submit Button */
-.melody-main-form > .field:last-child {
+/* .melody-main-form > .field:last-child {
+  text-align: center;
+} */
+
+.melody-main-form .button-main-submit {
   text-align: center;
 }
 
-#main-submit {
+.melody-main-form .button-main-submit button {
   display: inline-block;
   width: 150px;
 }
@@ -126,9 +130,17 @@ nav a {
   max-width: 30px;
 }
 
-.tempo-label {
-  display: block;
-  margin-top: 6px;
+.melody-preview-modal {
+  text-align: center;
+  font-weight: bold;
+}
+
+.melody-preview-modal-progress-label {
+  margin-bottom: 6px;
+}
+
+.melody-preview-modal-tempo-label {
+  margin: 6px 0 -12px 0;
 }
 
 /* .ui.definition.table tobody tr > td.result-table-title {
@@ -152,8 +164,24 @@ nav a {
   padding: 0 12px;
 }
 
-.rhythm-main-form {
-  text-align: center;
+.rhythm-main-form-tempo-field {
+  width: 196px;
+}
+
+/* not sold on this */
+.rhythm-main-form-tempo-field-slider-container {
+  border: 1px solid rgba(34,36,38,.15);
+  border-radius: 4px;
+  padding: 8px 2px;
+}
+
+.rhythm-main-form-tempo-field-slider-container .rangeslider {
+  margin: 4px;
+}
+
+/* Center button */
+.rhythm-main-form > .field:last-child {
+    text-align: center;
 }
 
 .rhythm-info-popup {
@@ -167,15 +195,17 @@ nav a {
   margin-top: 16px;
 }
 
+.rhythm-output h1 {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
 .rhythm-output div {
   margin-bottom: 16px;
   padding: 0 0 0 8px;
   font-size: 16px;
-}
-
-.rhythm-output h1 {
-  text-align: center;
-  margin-bottom: 16px;
+  overflow-y: scroll;
+  height: 56vh;
 }
 
 .rhythm-output table.ui.table {
@@ -183,6 +213,7 @@ nav a {
   padding: 0;
   border: none;
   border-collapse: collapse;
+  font-weight: bold;
 }
 
 .rhythm-output table.ui.table td {
@@ -200,6 +231,11 @@ nav a {
 
 .rhythm-output img {
   height: 38px;
+}
+
+/* Range Slider */
+.rangeslider-horizontal .rangeslider__fill {
+    background-color: #a333c8;
 }
 
 /* change to 950 after adding more links */

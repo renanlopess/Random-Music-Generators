@@ -21,21 +21,23 @@ export class MelodyResult extends Component {
   /*eslint-disable class-methods-use-this*/
   createTableCells(arr) {
     return arr.map((num, i) => {
-      return <Table.Cell key={i} className="result-table-cell">{num}</Table.Cell>;
+      return (
+        <Table.Cell key={i} className="result-table-cell">
+          {num}
+        </Table.Cell>
+      );
     });
   }
 
   render() {
     // console.log('melody result props', this.props)
     if (!this.props.melodies) {
-      return (
-        <div>Getting melodies...</div>
-      )
+      return <div>Getting melodies...</div>;
     }
     if (!this.props.melodies.length) {
       return (
         <div>
-          <h6 style={{margin: '25px'}}>Results will display here.</h6>
+          <h6 style={{ margin: '25px' }}>Results will display here.</h6>
         </div>
       );
     }
@@ -48,7 +50,9 @@ export class MelodyResult extends Component {
               <Table definition unstackable>
                 <Table.Body>
                   <Table.Row>
-                    <Table.Cell style={{width: '92px'}} className="result-table-title">Pitch</Table.Cell>
+                    <Table.Cell style={{ width: '92px' }} className="result-table-title">
+                      Pitch
+                    </Table.Cell>
                     {this.createTableCells(midiDataObject.pitchNamesWithOctave)}
                   </Table.Row>
                   <Table.Row>
@@ -59,12 +63,8 @@ export class MelodyResult extends Component {
               </Table>
               <MelodyModal midiDataObject={midiDataObject} />
 
-              <a
-                className="download"
-                title="Download"
-                href={midiDataObject.midiFile}
-              >
-                <Button icon labelPosition="left" color="grey">
+              <a className="download" title="Download" href={midiDataObject.midiFile}>
+                <Button icon labelPosition="left" color="grey" aria-label="Download" >
                   <Icon name="download" />
                   DOWNLOAD
                 </Button>
@@ -97,4 +97,7 @@ const mapDispatch = dispatch => {
   };
 };
 
-export default connect(mapState, mapDispatch)(MelodyResult);
+export default connect(
+  mapState,
+  mapDispatch
+)(MelodyResult);

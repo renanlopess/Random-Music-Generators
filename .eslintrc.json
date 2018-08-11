@@ -1,15 +1,17 @@
 {
-	"root": true,
-	"parser": "babel-eslint",
-	"extends": "fullstack",
-	"rules": {
-		"semi": [1, "always"],
-		"new-cap": [1, { "capIsNewExceptions": ["Router"] }],
-		"max-len": [
-			"warn",
-			{
-				"code": 90
-			}
-		]
-	}
+  "root": true,
+  "parser": "babel-eslint",
+  "extends": "fullstack",
+  "rules": {
+    "semi": [1, "always"],
+    "new-cap": [1, { "capIsNewExceptions": ["Router"] }],
+    "max-len": [
+      "warn",
+      {
+        "code": 90
+      }
+    ],
+    "react/prop-types": 1,
+    "react/require-default-props": 1
+  }
 }

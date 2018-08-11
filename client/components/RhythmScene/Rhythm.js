@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { Form, Select, Button, Icon } from 'semantic-ui-react';
 import uniqueId from 'lodash.uniqueid';
 import { getMelodies } from '../../store/melodies';
-// import { generateMidiArray } from '../../../server/script/generateMidiArray';
+import { createRhythmMidiFile } from '../../../server/script/generateMidiArray';
+import { TempoSlider } from '../MelodyScene';
 import InfoPopup from './InfoPopup';
 import RhythmResult from './RhythmResult';
 import {
@@ -21,7 +22,8 @@ import createRhythmTrack from './bandjsRhythmTrack';
 
 const INITIAL_FORM_VALUES = {
   rhythmType: '8',
-  timeSig: '3/4'
+  timeSig: '3/4',
+  tempo: 60
 };
 
 const rhythmTypeOptions = Object.keys(RHYTHM_OPTIONS).map(item => {
@@ -45,8 +47,17 @@ export class Rhythm extends Component {
     this.player = null;
   }
 
+  componentWillUnmount() {
+    this.stopPlayer();
+    this.player = null;
+  }
+
   handleChange = (evt, { name, value }) => {
     this.setState({ [name]: value });
+  };
+
+  handleTempoChange = value => {
+    this.setState({ tempo: value });
   };
 
   handleSubmit = evt => {
@@ -63,8 +74,8 @@ export class Rhythm extends Component {
 
   playRhythm = rhythmArray => {
     this.stopPlayer();
-    const { timeSig } = this.state;
-    this.player = createRhythmTrack(timeSig, rhythmArray);
+    const { timeSig, tempo } = this.state;
+    this.player = createRhythmTrack(timeSig, rhythmArray, tempo);
     setTimeout(() => {
       // this.loopPlayer();
       this.player.play();
@@ -97,7 +108,8 @@ export class Rhythm extends Component {
       timeSig,
       submittedRhythmType,
       submittedTimeSig,
-      submittedRhythmArray
+      submittedRhythmArray,
+      tempo
     } = this.state;
 
     return (
@@ -120,10 +132,25 @@ export class Rhythm extends Component {
               value={rhythmType}
               onChange={this.handleChange}
             />
+            <Form.Field className="rhythm-main-form-tempo-field">
+              <label>Tempo: {tempo}</label>
+              <div className="rhythm-main-form-tempo-field-slider-container">
+                <TempoSlider
+                  settings={{ tooltip: false }}
+                  handleChange={this.handleTempoChange}
+                  value={tempo}
+                />
+              </div>
+            </Form.Field>
           </Form.Group>
-          <Form.Button color="purple" content="Submit" id="main-submit" />
+          <Form.Button
+            color="purple"
+            content="Submit"
+            className="button-main-submit"
+            aria-label="Submit"
+          />
         </Form>
-        {submittedRhythmArray.length && (
+        {submittedRhythmArray.length ? (
           <div className="rhythm-output">
             <h1>
               {getRhythmHeading(
@@ -145,6 +172,7 @@ export class Rhythm extends Component {
                       icon
                       labelPosition="left"
                       color="blue"
+                      aria-label="Play"
                       onClick={() => {
                         this.playRhythm(rhythmArray);
                       }}
@@ -155,13 +183,26 @@ export class Rhythm extends Component {
                       icon
                       labelPosition="left"
                       color="blue"
+                      aria-label="Stop"
                       onClick={() => {
                         this.stopPlayer();
                       }}
                     >
                       <Icon name="stop" />
                     </Button>
-                    <Button icon labelPosition="left" color="black">
+                    <Button
+                      icon
+                      labelPosition="left"
+                      color="black"
+                      aria-label="Download"
+                      onClick={() => {
+                        window.location.href = createRhythmMidiFile(
+                          rhythmArray,
+                          tempo,
+                          timeSig
+                        );
+                      }}
+                    >
                       <Icon name="download" />
                     </Button>
                   </RhythmResult>
@@ -169,7 +210,7 @@ export class Rhythm extends Component {
               })}
             </div>
           </div>
-        )}
+        ) : null}
       </div>
     );
   }

@@ -27,26 +27,28 @@ id: timeSig
 // ===================
 
 const RHYTHM_MAP = {
-  '1/2': 0.5,
-  '1/4': 0.25,
-  '3/4': 0.75,
-  '4/4': 1,
-  '5/4': 1.25,
-  '6/4': 1.5,
-  '7/4': 7 / 4,
-  '9/4': 9 / 4,
-  '11/4': 11 / 4,
-  '12/4': 3,
-  '13/4': 13 / 4,
-  '15/4': 15 / 4,
-  '1/6': 1 / 6,
-  '1/8': 1 / 8,
-  '3/8': 3 / 8,
-  '1/12': 1 / 12,
-  '1/16': 1 / 16,
-  '3/16': 3 / 16,
-  '1/24': 1 / 24,
-  '5/24': 5 / 24
+  '1/2': { value: 0.5, midiwriter: 2},
+  '1/4': { value: 0.25, midiwriter: 4},
+  '3/4': { value: 0.75, midiwriter: 'd2'},
+  '4/4': { value: 1, midiwriter: 1},
+  '5/4': { value: 1.25, midiwriter: [1, 4]},
+  '6/4': { value: 1.5, midiwriter: [1, 2]},
+  '7/4': { value: 7 / 4, midiwriter: [1, 'd2']},
+  '9/4': { value: 9 / 4, midiwriter: [1, 1, 4]},
+  '11/4': { value: 11 / 4, midiwriter: [1, 1, 'd2']},
+  '12/4': { value: 3, midiwriter: [1, 1, 1]},
+  '13/4': { value: 13 / 4, midiwriter: [1, 1, 1, 4]},
+  '15/4': { value: 15 / 4, midiwriter: [1, 1, 1, 'd2']},
+  '1/6': { value: 1 / 6, midiwriter: '4t'},
+  '1/8': { value: 1 / 8, midiwriter: 8},
+  '3/8': { value: 3 / 8, midiwriter: 'd4'},
+  '1/12': { value: 1 / 12, midiwriter: '8t'},
+  '1/16': { value: 1 / 16, midiwriter: 16},
+  '3/16': { value: 3 / 16, midiwriter: 'd8'},
+  '1/24': { value: 1 / 24, midiwriter: '16t'},
+  '5/24': { value: 5 / 24, midiwriter: [8, '8t']},
+  '1/32': { value: 1 / 32, midiwriter: 32},
+  '1/64': { value: 1 / 64, midiwriter: 64},
 };
 
 const TIME_SIGNATURE_OPTIONS = new Set([
@@ -105,7 +107,7 @@ function randomChoice(myArray) {
 
 // MAIN
 function createRhythms(timeSigString, rhythmTypeString) {
-  const timeSigValue = RHYTHM_MAP[timeSigString];
+  const timeSigValue = RHYTHM_MAP[timeSigString].value;
   const rhythmTypeSelection = RHYTHM_OPTIONS[rhythmTypeString];
   const noteValues = rhythmTypeSelection.values;
 
@@ -147,7 +149,7 @@ function getRandomRhythmMeasure(noteValues, timeSigString, timeSigValue) {
   let measureCalculation = 0;
   while (timeSigValue - measureCalculation > 0) {
     const randomNoteStr = randomChoice(noteValues); // gets a string
-    const randomNoteValue = RHYTHM_MAP[randomNoteStr];
+    const randomNoteValue = RHYTHM_MAP[randomNoteStr].value;
     if (isBoringRhythm(timeSigString, randomNoteStr)) {
       continue;
     }
