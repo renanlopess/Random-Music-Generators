@@ -22,7 +22,7 @@ export class MelodyResult extends Component {
   createTableCells(arr) {
     return arr.map((num, i) => {
       return (
-        <Table.Cell key={i} className="result-table-cell">
+        <Table.Cell key={i} className="melody-result-table-cell">
           {num}
         </Table.Cell>
       );
@@ -43,20 +43,20 @@ export class MelodyResult extends Component {
     }
 
     return (
-      <div id="result-wrapper">
+      <div className="melody-result-wrapper">
         {this.props.melodies.map((midiDataObject, i) => {
           return (
-            <div key={i} className="result-single">
+            <div key={i} className="melody-result-single">
               <Table definition unstackable>
                 <Table.Body>
                   <Table.Row>
-                    <Table.Cell style={{ width: '92px' }} className="result-table-title">
+                    <Table.Cell className="melody-result-table-title">
                       Pitch
                     </Table.Cell>
                     {this.createTableCells(midiDataObject.pitchNamesWithOctave)}
                   </Table.Row>
                   <Table.Row>
-                    <Table.Cell className="result-table-title">MIDI Code</Table.Cell>
+                    <Table.Cell className="melody-result-table-title">MIDI Code</Table.Cell>
                     {this.createTableCells(midiDataObject.midiCodeArray)}
                   </Table.Row>
                 </Table.Body>
