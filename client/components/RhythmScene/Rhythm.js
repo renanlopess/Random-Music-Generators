@@ -143,7 +143,12 @@ export class Rhythm extends Component {
               </div>
             </Form.Field>
           </Form.Group>
-          <Form.Button color="purple" content="Submit" className="button-main-submit" />
+          <Form.Button
+            color="purple"
+            content="Submit"
+            className="button-main-submit"
+            aria-label="Submit"
+          />
         </Form>
         {submittedRhythmArray.length ? (
           <div className="rhythm-output">
@@ -167,6 +172,7 @@ export class Rhythm extends Component {
                       icon
                       labelPosition="left"
                       color="blue"
+                      aria-label="Play"
                       onClick={() => {
                         this.playRhythm(rhythmArray);
                       }}
@@ -177,6 +183,7 @@ export class Rhythm extends Component {
                       icon
                       labelPosition="left"
                       color="blue"
+                      aria-label="Stop"
                       onClick={() => {
                         this.stopPlayer();
                       }}
@@ -187,8 +194,13 @@ export class Rhythm extends Component {
                       icon
                       labelPosition="left"
                       color="black"
+                      aria-label="Download"
                       onClick={() => {
-                        window.location.href = createRhythmMidiFile(rhythmArray, tempo, timeSig);
+                        window.location.href = createRhythmMidiFile(
+                          rhythmArray,
+                          tempo,
+                          timeSig
+                        );
                       }}
                     >
                       <Icon name="download" />

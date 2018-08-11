@@ -48,6 +48,7 @@ export class MelodyModal extends Component {
             icon
             labelPosition="left"
             color="blue"
+            aria-label="Play"
             onClick={() => this.handleOpen(midiDataObject)}
             {...modalSizeProp}
           >

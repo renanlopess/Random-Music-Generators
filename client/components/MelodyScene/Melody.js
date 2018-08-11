@@ -120,7 +120,7 @@ export class Melody extends Component {
               onChange={this.handleChange}
             />
           </Form.Group>
-          <Form.Button color="purple" content="Submit" className="button-main-submit" />
+          <Form.Button color="purple" content="Submit" className="button-main-submit" aria-label="Submit" />
         </Form>
         <MelodyResult />
       </div>
